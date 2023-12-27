@@ -1,16 +1,5 @@
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
-const plugin = require('tailwindcss/plugin');
-
-const headings_px = [64, 45, 40, 32, 28, 20].reduce((acc, v) => {
-  acc[v.toString()] = `${v}px`;
-  return acc;
-}, {} as { [key: string]: string });
-
-const paragraph_px = [20, 16, 14].reduce((acc, v) => {
-  acc[v.toString()] = `${v}px`;
-  return acc;
-}, {} as { [key: string]: string });
 
 const config: Config = {
   content: [
@@ -19,19 +8,6 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    // customFontSize: ({ theme }) => ({
-    //   p: {
-    // lg: {
-    //   fontSize: '20px',
-    //   fontWeight: theme('fontWeight.normal'),
-    // },
-    // md: {
-    //   fontSize: '16px',
-    //   fontWeight: theme('fontWeight.normal'),
-    // },
-    // sm: { fontSize: '14px', fontWeight: theme('fontWeight.normal') },
-    //   },
-    // }),
     colors: {
       ...defaultTheme.colors,
       primary: {
@@ -51,92 +27,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      fontSize: {
-        ...headings_px,
-        ...paragraph_px,
-      },
+      // fontSize: {
+      // ...headings_px,
+      // ...paragraph_px,
+      // },
     },
   },
   plugins: [
-    plugin(({ addUtilities, theme }) => {
-      const headings: { [key: string]: object } = {
-        h1: {
-          sm: {
-            fontSize: theme('fontSize.40'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-          lg: {
-            fontSize: theme('fontSize.64'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-        },
-        h2: {
-          sm: {
-            fontSize: theme('fontSize.32'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-          lg: {
-            fontSize: theme('fontSize.45'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-        },
-        h3: {
-          sm: {
-            fontSize: theme('fontSize.28'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-          lg: {
-            fontSize: theme('fontSize.32'),
-            fontWeight: theme('fontWeight.bold'),
-          },
-        },
-        h4: {
-          sm: {
-            fontSize: theme('fontSize.28'),
-            fontWeight: theme('fontWeight.semibold'),
-          },
-          lg: {
-            fontSize: theme('fontSize.28'),
-            fontWeight: theme('fontWeight.semibold'),
-          },
-        },
-        h5: {
-          sm: {
-            fontSize: theme('fontSize.20'),
-            fontWeight: theme('fontWeight.semibold'),
-          },
-          lg: {
-            fontSize: theme('fontSize.20'),
-            fontWeight: theme('fontWeight.semibold'),
-          },
-        },
-      };
-      const headingUtiliities: { [key: string]: object } = {};
-      Object.entries(headings).forEach(([type, sizes]) => {
-        Object.keys(sizes).forEach((size) => {
-          headingUtiliities[`.${type}-${size}`] = { ...headings[type][size] };
-        });
-      });
-
-      const paragraphUtillities: { [key: string]: object } = {};
-
-      const paragraph = {
-        lg: {
-          fontSize: theme('fontSize.20'),
-          fontWeight: theme('fontWeight.normal'),
-        },
-        md: {
-          fontSize: theme('fontSize.16'),
-          fontWeight: theme('fontWeight.normal'),
-        },
-        sm: {
-          fontSize: theme('fontSize.16'),
-          fontWeight: theme('fontWeight.normal'),
-        },
-      };
-
-      addUtilities(headingUtiliities);
-    }),
+    require('./tailwind_plugins/paragraph.ts'),
+    require('./tailwind_plugins/headings.ts'),
   ],
 };
 export default config;
