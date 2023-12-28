@@ -12,13 +12,8 @@ module.exports = buttonPlugin.withOptions(
           padding: '18px 60px',
           'border-radius': '30px',
           'font-size': '20px',
-          // overflow: 'hidden',
           position: 'relative',
-          // transition: '1s transform ease-in-out',
         },
-        // hover: {
-        //   animate: {},
-        // },
       }
     ) =>
     ({ theme, addComponents }) => {
@@ -36,28 +31,26 @@ module.exports = buttonPlugin.withOptions(
           zIndex: theme('zIndex.0'),
           overflow: 'hidden',
 
-          '&::before': {
-            display: 'block',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: 'inherit',
-            height: '100%',
-            transform: 'translateX(-100%)',
-            zIndex: -theme('zIndex.10'),
-            'border-radius': 'inherit',
-            'background-color': theme('colors.btn.gray'),
-          },
-
           '&:hover': {
             color: theme('colors.default.black'),
             'background-color': theme('colors.default.gray'),
-
-            '&::before': {
-              transition: 'transform 1s',
-              transform: 'translateX(0)',
-            },
           },
+        },
+        [`.${defaultClass}-before`]: {
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: 'inherit',
+          height: '100%',
+          transform: 'translateX(-100%)',
+          zIndex: -theme('zIndex.10'),
+          'border-radius': 'inherit',
+          'background-color': theme('colors.btn.gray'),
+        },
+        [`.${defaultClass}-before-animate`]: {
+          transition: 'transform 1s',
+          transform: 'translate(0)',
         },
       });
     }

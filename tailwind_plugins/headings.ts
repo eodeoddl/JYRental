@@ -68,12 +68,7 @@ module.exports = headingsPlugin.withOptions(
 
       addUtilities(headingUtiliities);
     },
-  (
-    // headings_px = [64, 45, 40, 32, 28, 20].reduce((acc, v) => {
-    //   acc[v.toString()] = `${v}px`;
-    //   return acc;
-    // }, {} as { [key: string]: string })
-  ) => {
+  () => {
     const headings_px = [64, 45, 40, 32, 28, 20].reduce((acc, v) => {
       acc[v.toString()] = `${v}px`;
       return acc;
