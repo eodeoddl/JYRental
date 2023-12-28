@@ -1,6 +1,6 @@
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
-
+//  './tailwind_plugins/**/*.{js,ts,jsx,tsx,mdx}',
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -13,6 +13,13 @@ const config: Config = {
       primary: {
         blue: '#01A0E9',
         orange: '#ED6A00',
+      },
+      btn: {
+        'light-blue': '#01A0E9',
+        'dark-blue': '#006A9B',
+        gray: '#DDDDDD',
+        'light-orange': '#ED6A00',
+        'dark-orange': '#CD6511',
       },
       default: {
         'light-blue': '#F8FAFC',
@@ -27,15 +34,18 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      // fontSize: {
-      // ...headings_px,
-      // ...paragraph_px,
+      // animation: {
+      //   'btn-hover': ' 1s linear',
       // },
+      // keyframe : {
+
+      // }
     },
   },
   plugins: [
     require('./tailwind_plugins/paragraph.ts'),
     require('./tailwind_plugins/headings.ts'),
+    require('./tailwind_plugins/button.ts'),
   ],
 };
 export default config;
