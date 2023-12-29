@@ -1,11 +1,20 @@
-// /** @type {import('tailwindcss').Config} */
-
 const headingsPlugin = require('tailwindcss/plugin');
+
+type ScreenSizes = 'sm' | 'lg';
+type Headings = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+
+type CssStyle = {
+  readonly [H in Headings]: { readonly [S in ScreenSizes]: object };
+};
+
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
 
 module.exports = headingsPlugin.withOptions(
   () =>
     ({ addUtilities, theme }) => {
-      const headings_style: { [key: string]: { [key: string]: object } } = {
+      const headings_style: CssStyle = {
         h1: {
           sm: {
             fontSize: theme('fontSize.40'),
@@ -57,9 +66,13 @@ module.exports = headingsPlugin.withOptions(
           },
         },
       };
+
       const headingUtiliities: { [key: string]: object } = {};
-      Object.entries(headings_style).forEach(([type, sizes]) => {
-        Object.keys(sizes).forEach((size) => {
+
+      (
+        Object.entries(headings_style) as Entries<typeof headings_style>
+      ).forEach(([type, sizes]) => {
+        (Object.keys(sizes) as (keyof typeof sizes)[]).forEach((size) => {
           headingUtiliities[`.${type}-${size}`] = {
             ...headings_style[type][size],
           };

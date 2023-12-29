@@ -1,5 +1,3 @@
-// /** @type {import('tailwindcss').Config} */
-
 const buttonPlugin = require('tailwindcss/plugin');
 
 module.exports = buttonPlugin.withOptions(
@@ -12,7 +10,6 @@ module.exports = buttonPlugin.withOptions(
           padding: '18px 60px',
           'border-radius': '30px',
           'font-size': '20px',
-          position: 'relative',
         },
       }
     ) =>
@@ -30,6 +27,7 @@ module.exports = buttonPlugin.withOptions(
           ...defaultStyle,
           zIndex: theme('zIndex.0'),
           overflow: 'hidden',
+          position: 'relative',
 
           '&:hover': {
             color: theme('colors.default.black'),
@@ -46,7 +44,6 @@ module.exports = buttonPlugin.withOptions(
           transform: 'translateX(-100%)',
           zIndex: -theme('zIndex.10'),
           'border-radius': 'inherit',
-          'background-color': theme('colors.btn.gray'),
         },
         [`.${defaultClass}-before-animate`]: {
           transition: 'transform 1s',

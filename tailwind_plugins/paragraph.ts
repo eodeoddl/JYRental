@@ -1,5 +1,3 @@
-// /** @type {import('tailwindcss').Config} */
-
 const pargraphPlugin = require('tailwindcss/plugin');
 
 module.exports = pargraphPlugin.withOptions(

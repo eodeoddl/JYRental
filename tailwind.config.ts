@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
-//  './tailwind_plugins/**/*.{js,ts,jsx,tsx,mdx}',
 const config: Config = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -34,12 +33,6 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      // animation: {
-      //   'btn-hover': ' 1s linear',
-      // },
-      // keyframe : {
-
-      // }
     },
   },
   plugins: [
