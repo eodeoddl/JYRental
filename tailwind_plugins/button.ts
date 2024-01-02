@@ -1,9 +1,14 @@
+import { ButtonClass } from './types';
+
 const buttonPlugin = require('tailwindcss/plugin');
+
+type Components_btn = {
+  [K in ButtonClass]: object;
+};
 
 module.exports = buttonPlugin.withOptions(
   (
       options = {
-        className: 'btn',
         style: {
           width: '209px',
           height: '63px',
@@ -13,17 +18,17 @@ module.exports = buttonPlugin.withOptions(
         },
       }
     ) =>
-    ({ theme, addComponents }) => {
-      // const { animate } = options.hover;
-      const defaultClass = options.className;
+    // I don't know what exactly types of destructuring properties
+    ({ theme, addComponents }: any) => {
       const defaultStyle = {
         ...options.style,
         fontWeight: theme('fontWeight.bold'),
       };
 
-      addComponents({
-        [`.${defaultClass}`]: defaultStyle,
-        [`.${defaultClass}-animate`]: {
+      const btnClasses: Components_btn = {
+        '.btn': defaultStyle,
+
+        '.btn-animate': {
           ...defaultStyle,
           zIndex: theme('zIndex.0'),
           overflow: 'hidden',
@@ -34,7 +39,8 @@ module.exports = buttonPlugin.withOptions(
             'background-color': theme('colors.default.gray'),
           },
         },
-        [`.${defaultClass}-before`]: {
+
+        '.btn-before': {
           display: 'block',
           position: 'absolute',
           top: 0,
@@ -45,10 +51,13 @@ module.exports = buttonPlugin.withOptions(
           zIndex: -theme('zIndex.10'),
           'border-radius': 'inherit',
         },
-        [`.${defaultClass}-before-animate`]: {
+
+        '.btn-before-animate': {
           transition: 'transform 1s',
           transform: 'translate(0)',
         },
-      });
+      };
+
+      addComponents(btnClasses);
     }
 );

@@ -1,20 +1,21 @@
+/** @type {import('tailwindcss').Config} */
+
+import { ObjectKeyTypes, EntrieTypes } from '@/utils/types/type';
+import { Headings, ScreenSizes } from './types';
+
 const headingsPlugin = require('tailwindcss/plugin');
 
-type ScreenSizes = 'sm' | 'lg';
-type Headings = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-
-type CssStyle = {
-  readonly [H in Headings]: { readonly [S in ScreenSizes]: object };
+type CssStyle_H = {
+  readonly [H in Headings]: { readonly [S in ScreenSizes]?: object };
 };
 
-type Entries<T> = {
-  [K in keyof T]: [K, T[K]];
-}[keyof T][];
+type utillityKeys_H = `.${Headings}-${ScreenSizes}`;
 
 module.exports = headingsPlugin.withOptions(
   () =>
-    ({ addUtilities, theme }) => {
-      const headings_style: CssStyle = {
+    // I don't know what exactly types of destructuring properties
+    ({ addUtilities, theme }: any) => {
+      const headings_style: CssStyle_H = {
         h1: {
           sm: {
             fontSize: theme('fontSize.40'),
@@ -67,15 +68,16 @@ module.exports = headingsPlugin.withOptions(
         },
       };
 
-      const headingUtiliities: { [key: string]: object } = {};
+      const headingUtiliities: { [K in utillityKeys_H]?: object } = {};
 
       (
-        Object.entries(headings_style) as Entries<typeof headings_style>
+        Object.entries(headings_style) as EntrieTypes<typeof headings_style>
       ).forEach(([type, sizes]) => {
-        (Object.keys(sizes) as (keyof typeof sizes)[]).forEach((size) => {
-          headingUtiliities[`.${type}-${size}`] = {
-            ...headings_style[type][size],
-          };
+        (Object.keys(sizes) as ObjectKeyTypes<typeof sizes>).forEach((size) => {
+          size &&
+            (headingUtiliities[`.${type}-${size}`] = {
+              ...headings_style[type][size],
+            });
         });
       });
 

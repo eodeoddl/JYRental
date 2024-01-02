@@ -1,11 +1,19 @@
+import { ObjectKeyTypes } from '@/utils/types/type';
+import { ScreenSizes } from './types';
+
 const pargraphPlugin = require('tailwindcss/plugin');
+
+type CssStyle_P = {
+  readonly [K in ScreenSizes]?: object;
+};
+
+type utillityKeys_P = `.paragraph-${ScreenSizes}`;
 
 module.exports = pargraphPlugin.withOptions(
   () =>
-    ({ theme, addUtilities }) => {
-      const paragraphUtillities: { [key: string]: object } = {};
-
-      const paragraph_style: { [key: string]: object } = {
+    // i don't know what exactly types of destructuring properties
+    ({ theme, addUtilities }: any) => {
+      const paragraph_style: CssStyle_P = {
         lg: {
           fontSize: theme('fontSize.20'),
           fontWeight: theme('fontWeight.normal'),
@@ -20,9 +28,16 @@ module.exports = pargraphPlugin.withOptions(
         },
       };
 
-      Object.keys(paragraph_style).forEach(
-        (key) =>
-          (paragraphUtillities[`.paragraph-${key}`] = paragraph_style[key])
+      const paragraphUtillities: {
+        [K in utillityKeys_P]?: object;
+      } = {};
+
+      (
+        Object.keys(paragraph_style) as ObjectKeyTypes<typeof paragraph_style>
+      ).forEach(
+        (size) =>
+          size &&
+          (paragraphUtillities[`.paragraph-${size}`] = paragraph_style[size])
       );
 
       addUtilities(paragraphUtillities);
