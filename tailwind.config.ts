@@ -1,4 +1,3 @@
-// import type AA from 'tailwindcss';
 import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
@@ -41,6 +40,7 @@ const config: Config = {
     require('./tailwind_plugins/paragraph.ts'),
     require('./tailwind_plugins/headings.ts'),
     require('./tailwind_plugins/button.ts'),
+    require('@tailwindcss/container-queries'),
   ],
 };
 export default config;
