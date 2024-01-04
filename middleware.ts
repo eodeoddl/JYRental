@@ -18,7 +18,6 @@ export default function viewportMiddleware(request: NextRequest) {
   });
 
   response.headers.set('viewport', viewport);
-  response.cookies.set('Tlqkf', 'Tlqkf');
 
   // console.info('response header', response);
 
