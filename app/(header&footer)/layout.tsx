@@ -9,9 +9,7 @@ export default function HeaderWithFooter({
 }) {
   return (
     <>
-      <Header>
-        <Navigation />
-      </Header>
+      <Header />
       {children}
       <Footer />
     </>

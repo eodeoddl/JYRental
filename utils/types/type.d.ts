@@ -6,4 +6,6 @@ type ObjectKeyTypes<T extends object> = {
   [K in keyof T]: K;
 }[keyof T][];
 
-export type { ObjectKeyTypes, EntrieTypes };
+type ScreenBreakPoint_Header = [430, 500];
+
+export type { ObjectKeyTypes, EntrieTypes, ScreenBreakPoint_Header };
