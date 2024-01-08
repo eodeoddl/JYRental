@@ -1,7 +1,7 @@
-// 'use client';
+'use client';
 
 // import { useLayoutEffect, useRef, useState } from 'react';
-import { headers } from 'next/headers';
+// import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export default function Header() {

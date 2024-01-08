@@ -1,18 +1,15 @@
-import Footer from '@/components/footer/footer';
-import Header from '@/components/header/header';
-import Navigation from '@/components/navigation/navigation_desktop';
-import { headers } from 'next/headers';
-import { NextResponse } from 'next/server';
+import Footer from "@/components/footer/footer";
+import Header from "@/components/header/header";
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import Navigation from "@/components/navigation/navigation_desktop";
 
-export default function Home() {
-  console.log('page header render ');
-  const response = NextResponse.next().headers;
-  console.log(response);
+export default async function Home() {
   return (
     <>
-      {/* <Navigation /> */}
       <Header />
-      <main className=''> Home </main>
+      <Navigation />
+      <main className=""> Home </main>
       <Footer />
     </>
   );
