@@ -1,41 +1,32 @@
-'use client';
+"use client";
 
-// import { useLayoutEffect, useRef, useState } from 'react';
-// import { headers } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { useEffect, useRef, useState } from "react";
+import Navigation_desktop from "../navigation/navigation_desktop";
 
-export default function Header() {
+export default function Header({ viewport }: { viewport: string | null }) {
+  console.log("header client component", viewport);
   // resizeable 테스트 후 Hooks로 따로 관리할 예정
-  // const resizeable = useRef<HTMLElement | null>(null);
-  // const [isMobile, setIsMobile] = useState<boolean | null>(null);
+  const resizeable = useRef<HTMLElement | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(viewport === "mobile");
 
-  // useLayoutEffect(() => {
-  //   const Element = resizeable.current;
-  //   const breakPoint = 430;
-  //   const resizeObserver = new ResizeObserver(([entry]) => {
-  //     const { inlineSize } = entry.borderBoxSize[0];
-  //     setIsMobile(inlineSize < breakPoint);
-  //   });
-  //   Element && resizeObserver.observe(Element);
+  useEffect(() => {
+    const Element = resizeable.current;
+    const breakPoint = 430;
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const { inlineSize } = entry.borderBoxSize[0];
+      setIsMobile(inlineSize < breakPoint);
+    });
+    Element && resizeObserver.observe(Element);
 
-  //   return () => {
-  //     Element && resizeObserver.unobserve(Element);
-  //   };
-  // }, []);
-
-  // ssr render
-  // const response = NextResponse.next().headers;
-  // console.log('response value => ', response);
-
-  // const header = headers();
-  // console.log(header);
+    return () => {
+      Element && resizeObserver.unobserve(Element);
+    };
+  }, []);
 
   return (
-    // <header ref={resizeable} className='w-full'>
-    //   some other static content,,,
-    //   {isMobile !== null &&
-    //     (isMobile ? ' Header is Mobile ' : ' Header is desktop ')}
-    // </header>
-    <header>Header</header>
+    <header ref={resizeable} className="w-full">
+      some other static content,,,
+      {isMobile ? " Mobile Header children " : <Navigation_desktop />}
+    </header>
   );
 }

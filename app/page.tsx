@@ -1,15 +1,27 @@
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import Navigation_Mobile from "@/components/navigation/navigation_mobile";
 import { headers } from "next/headers";
-import { NextResponse } from "next/server";
-import Navigation from "@/components/navigation/navigation_desktop";
+
+// export const getServerSideProps = (async () => {
+//   console.log(" Home pages response console => ");
+//   console.log(NextResponse.next(), headers());
+//   return { props: { '1': true } };
+// }) satisfies GetServerSideProps<{ props: { [key: string]: boolean } }>;
+
+export const getHead = async () => {
+  console.log("fetch head");
+  await fetch("http://localhost:3000/api", { method: "GET" });
+};
 
 export default async function Home() {
+  const head = headers();
+  const viewport = head.get("viewport");
   return (
     <>
-      <Header />
-      <Navigation />
-      <main className=""> Home </main>
+      <Header viewport={viewport} />
+      {viewport === "mobile" && <Navigation_Mobile />}
+      <main className=""> Home Component </main>
       <Footer />
     </>
   );
