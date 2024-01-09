@@ -8,4 +8,19 @@ type ObjectKeyTypes<T extends object> = {
 
 type ScreenBreakPoint_Header = [430, 500];
 
-export type { ObjectKeyTypes, EntrieTypes, ScreenBreakPoint_Header };
+type BreakPoints = {
+  sm: "(min-width : 640px)";
+  lg: "(min-width : 1024px)";
+};
+
+type Viewport = "mobile" | "desktop" | null;
+
+interface RenderTransitionElement {}
+
+export type {
+  ObjectKeyTypes,
+  EntrieTypes,
+  ScreenBreakPoint_Header,
+  BreakPoints,
+  Viewport,
+};

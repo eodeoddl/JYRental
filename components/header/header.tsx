@@ -1,32 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Navigation_desktop from "../navigation/navigation_desktop";
+import useMatchMedia from "@/utils/hooks/useMatchMedia";
+import { Viewport } from "@/utils/types/type";
+import { useState } from "react";
 
-export default function Header({ viewport }: { viewport: string | null }) {
-  console.log("header client component", viewport);
-  // resizeable 테스트 후 Hooks로 따로 관리할 예정
-  const resizeable = useRef<HTMLElement | null>(null);
-  const [isMobile, setIsMobile] = useState<boolean>(viewport === "mobile");
-
-  useEffect(() => {
-    const Element = resizeable.current;
-    const breakPoint = 430;
-    const resizeObserver = new ResizeObserver(([entry]) => {
-      const { inlineSize } = entry.borderBoxSize[0];
-      setIsMobile(inlineSize < breakPoint);
-    });
-    Element && resizeObserver.observe(Element);
-
-    return () => {
-      Element && resizeObserver.unobserve(Element);
-    };
-  }, []);
+export default function Header({ viewport }: { viewport: Viewport }) {
+  const breakPoint_sm = useMatchMedia("(min-width : 640px)", viewport);
+  const [popup, setPopup] = useState(false);
 
   return (
-    <header ref={resizeable} className="w-full">
+    <header className="w-full">
       some other static content,,,
-      {isMobile ? " Mobile Header children " : <Navigation_desktop />}
+      {breakPoint_sm ? <Navigation_desktop /> : " mobile Header children "}
+      <button onClick={() => setPopup(true)}>open modal</button>
     </header>
   );
 }

@@ -1,6 +1,7 @@
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Navigation_Mobile from "@/components/navigation/navigation_mobile";
+import { Viewport } from "@/utils/types/type";
 import { headers } from "next/headers";
 
 // export const getServerSideProps = (async () => {
@@ -19,8 +20,8 @@ export default async function Home() {
   const viewport = head.get("viewport");
   return (
     <>
-      <Header viewport={viewport} />
-      {viewport === "mobile" && <Navigation_Mobile />}
+      <Header viewport={viewport as Viewport} />
+      <Navigation_Mobile viewport={viewport as Viewport} />
       <main className=""> Home Component </main>
       <Footer />
     </>
