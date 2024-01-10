@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 const transitionCss: { [key: string]: string } = {
-  onExit: "",
-  onEnter: "",
+  onExit: "min-h-0",
+  onEnter: "min-h-full",
 };
 
 export default function Portal({

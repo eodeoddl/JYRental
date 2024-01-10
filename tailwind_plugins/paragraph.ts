@@ -1,13 +1,14 @@
-import { ObjectKeyTypes } from '@/utils/types/type';
-import { ScreenSizes } from './types';
+import { ObjectKeyTypes } from "@/types/common";
 
-const pargraphPlugin = require('tailwindcss/plugin');
+const pargraphPlugin = require("tailwindcss/plugin");
+
+type Sizes_P = "sm" | "md" | "lg";
 
 type CssStyle_P = {
-  readonly [K in ScreenSizes]?: object;
+  readonly [K in Sizes_P]?: object;
 };
 
-type utillityKeys_P = `.paragraph-${ScreenSizes}`;
+type utillityKeys_P = `.paragraph-${Sizes_P}`;
 
 module.exports = pargraphPlugin.withOptions(
   () =>
@@ -15,16 +16,16 @@ module.exports = pargraphPlugin.withOptions(
     ({ theme, addUtilities }: any) => {
       const paragraph_style: CssStyle_P = {
         lg: {
-          fontSize: theme('fontSize.20'),
-          fontWeight: theme('fontWeight.normal'),
+          fontSize: theme("fontSize.20"),
+          fontWeight: theme("fontWeight.normal"),
         },
         md: {
-          fontSize: theme('fontSize.16'),
-          fontWeight: theme('fontWeight.normal'),
+          fontSize: theme("fontSize.16"),
+          fontWeight: theme("fontWeight.normal"),
         },
         sm: {
-          fontSize: theme('fontSize.14'),
-          fontWeight: theme('fontWeight.normal'),
+          fontSize: theme("fontSize.14"),
+          fontWeight: theme("fontWeight.normal"),
         },
       };
 
@@ -35,18 +36,21 @@ module.exports = pargraphPlugin.withOptions(
       (
         Object.keys(paragraph_style) as ObjectKeyTypes<typeof paragraph_style>
       ).forEach(
-        (size) =>
+        size =>
           size &&
-          (paragraphUtillities[`.paragraph-${size}`] = paragraph_style[size])
+          (paragraphUtillities[`.paragraph-${size}`] = paragraph_style[size]),
       );
 
       addUtilities(paragraphUtillities);
     },
   () => {
-    const paragraph_px = [20, 16, 14].reduce((acc, v) => {
-      acc[v.toString()] = `${v}px`;
-      return acc;
-    }, {} as { [key: string]: string });
+    const paragraph_px = [20, 16, 14].reduce(
+      (acc, v) => {
+        acc[v.toString()] = `${v}px`;
+        return acc;
+      },
+      {} as { [key: string]: string },
+    );
 
     return {
       theme: {
@@ -55,5 +59,5 @@ module.exports = pargraphPlugin.withOptions(
         },
       },
     };
-  }
+  },
 );

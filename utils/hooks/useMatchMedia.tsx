@@ -1,5 +1,5 @@
+import { BreakPoints, Viewport } from "@/types/common";
 import { useEffect, useState } from "react";
-import { BreakPoints, Viewport } from "../types/type";
 
 export default function useMatchMedia(
   mediaQueryString: BreakPoints[keyof BreakPoints],

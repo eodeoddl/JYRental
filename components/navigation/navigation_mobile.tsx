@@ -1,7 +1,8 @@
 "use client";
 
-import useMatchMedia from "@/utils/hooks/useMatchMedia";
-import { Viewport } from "@/utils/types/type";
+import Portal from "@/utils/components/portal";
+import TransitionComponent from "@/utils/components/transitionComponent";
+import { useState } from "react";
 
 const routes = [
   { displayName: "홈", route: "/" },
@@ -9,15 +10,29 @@ const routes = [
   { displayName: "서비스", route: "/service" },
 ];
 
-export default function Navigation_Mobile({
-  viewport,
-}: {
-  viewport: Viewport;
-}) {
-  const breakPoint_sm = useMatchMedia("(min-width : 640px)", viewport);
+export default function Navigation_Mobile(
+  {
+    // topPosition,
+  }: {
+    // topPosition: null | number;
+  },
+) {
+  const [openModal, setOpenModal] = useState(false);
   return (
-    !breakPoint_sm && (
-      <nav className="fixed left-0 bottom-0">Mobile Navigation</nav>
-    )
+    <>
+      <button onClick={() => setOpenModal(prev => !prev)}>burger button</button>
+      <TransitionComponent
+        render={openModal}
+        renderElement={(trigger, onTransitionEnd) => (
+          <Portal
+            containerStyle="absolute top-[var(--header-height)] left-0 w-full bg-default-dark-gray"
+            trigger={trigger}
+            onTransitionEnd={onTransitionEnd}
+          >
+            <div className="">render portal component with chilren</div>
+          </Portal>
+        )}
+      />
+    </>
   );
 }
