@@ -4,7 +4,8 @@ type ButtonClass =
   | ".btn"
   | ".btn-animate"
   | ".btn-before"
-  | ".btn-before-animate";
+  | ".btn-before-animate"
+  | ".btn-burger";
 
 type Components_btn = {
   [K in ButtonClass]: object;
@@ -59,6 +60,21 @@ module.exports = buttonPlugin.withOptions(
         ".btn-before-animate": {
           transition: "transform 1s",
           transform: "translate(0)",
+        },
+
+        ".btn-burger": {
+          position: "relative",
+
+          span: {
+            position: "absolute",
+            left: 0,
+            width: "100%",
+            height: "4px",
+            "border-radius": "4px",
+            "background-color": "white",
+            transition: theme("transitionProperty.all"),
+            "transition-duration": theme("transitionDuration.500"),
+          },
         },
       };
 

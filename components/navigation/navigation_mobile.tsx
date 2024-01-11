@@ -6,11 +6,39 @@ import { useState } from "react";
 import routes from "./routes.json";
 import Link from "next/link";
 
-export default function Navigation_Mobile() {
+export default function Navigation_Mobile({
+  className,
+}: {
+  className?: string;
+}) {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      <button onClick={() => setOpenModal(prev => !prev)}>burger button</button>
+      {/* button  */}
+      <button
+        className={`btn-burger w-8 h-8 ${className}`}
+        onClick={() => setOpenModal(prev => !prev)}
+      >
+        <span
+          className={[
+            "top-0",
+            `${openModal ? "top-2/4 -translate-y-2/4 -rotate-[315deg]" : ""}`,
+          ].join(" ")}
+        ></span>
+        <span
+          className={[
+            "top-2/4 -translate-y-2/4",
+            `${openModal ? "opacity-0" : ""}`,
+          ].join(" ")}
+        ></span>
+        <span
+          className={[
+            "bottom-0",
+            `${openModal ? "top-2/4 -translate-y-2/4 rotate-[315deg]" : ""}`,
+          ].join(" ")}
+        ></span>
+      </button>
+      {/* nav */}
       <TransitionComponent
         render={openModal}
         onExit="h-0"

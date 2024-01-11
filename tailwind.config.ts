@@ -31,7 +31,8 @@ const config: Config = {
     },
     extend: {
       gridTemplateColumns: {
-        header: "minmax(auto, 100px) 1fr minmax(auto, 50px)",
+        header: "minmax(auto, 100px) 1fr",
+        "header-lg": "100px 1fr auto",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -44,6 +45,7 @@ const config: Config = {
     require("./tailwind_plugins/paragraph.ts"),
     require("./tailwind_plugins/headings.ts"),
     require("./tailwind_plugins/button.ts"),
+    require("./tailwind_plugins/selectChild.ts"),
     require("@tailwindcss/container-queries"),
   ],
 };
