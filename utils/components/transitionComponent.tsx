@@ -1,23 +1,27 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
 
-type Trigger = "onEnter" | "onExit";
+// type Trigger = "onEnter" | "onExit";
 type OnTransitionEnd = () => void;
 type RenderElement = (
-  trigger: Trigger,
+  trigger: string,
   onTransitionEnd: OnTransitionEnd,
 ) => React.ReactNode;
 
 export default function TransitionComponent({
   render,
   renderElement,
+  onExit,
+  onEnter,
 }: {
   render: boolean;
   renderElement: RenderElement;
+  onExit: string;
+  onEnter: string;
 }): boolean | React.ReactNode {
   const [isPending, startTransition] = useTransition();
   const [shouldMount, setShouldMount] = useState(false);
-  const [trigger, setTrigger] = useState<Trigger>("onExit");
+  const [trigger, setTrigger] = useState(onExit);
 
   useEffect(() => {
     if (render) startTransition(() => setShouldMount(true));
@@ -25,7 +29,7 @@ export default function TransitionComponent({
 
   useEffect(() => {
     if (shouldMount) {
-      render ? setTrigger("onEnter") : setTrigger("onExit");
+      render ? setTrigger(onEnter) : setTrigger(onExit);
     }
   }, [render, shouldMount]);
 

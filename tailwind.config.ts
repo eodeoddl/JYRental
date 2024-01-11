@@ -30,6 +30,9 @@ const config: Config = {
       },
     },
     extend: {
+      gridTemplateColumns: {
+        header: "minmax(auto, 100px) 1fr minmax(auto, 50px)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

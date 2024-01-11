@@ -3,33 +3,33 @@
 import Portal from "@/utils/components/portal";
 import TransitionComponent from "@/utils/components/transitionComponent";
 import { useState } from "react";
+import routes from "./routes.json";
+import Link from "next/link";
 
-const routes = [
-  { displayName: "홈", route: "/" },
-  { displayName: "제품", route: "/products" },
-  { displayName: "서비스", route: "/service" },
-];
-
-export default function Navigation_Mobile(
-  {
-    // topPosition,
-  }: {
-    // topPosition: null | number;
-  },
-) {
+export default function Navigation_Mobile() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
       <button onClick={() => setOpenModal(prev => !prev)}>burger button</button>
       <TransitionComponent
         render={openModal}
+        onExit="h-0"
+        onEnter="h-full"
         renderElement={(trigger, onTransitionEnd) => (
           <Portal
-            containerStyle="absolute top-[var(--header-height)] left-0 w-full bg-default-dark-gray"
+            containerStyle="fixed top-[var(--header-height)] left-0 w-full overflow-hidden bg-default-dark-gray/75 "
             trigger={trigger}
             onTransitionEnd={onTransitionEnd}
           >
-            <div className="">render portal component with chilren</div>
+            <nav>
+              <ul className="">
+                {routes.data.map(({ displayName, route }) => (
+                  <li key={displayName}>
+                    <Link href={route}>{displayName}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </Portal>
         )}
       />

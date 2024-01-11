@@ -27,13 +27,14 @@ export default function Header({ viewport }: { viewport: Viewport }) {
       <div ref={scrollWatcher} />
       <header
         className={
-          "w-full h-[var(--header-height)] bg-default-gray " +
+          "w-full h-[var(--header-height)] bg-default-gray grid grid-cols-header " +
           `${
             isScrolled ? "fixed top-0 left-0 bg-default-gray/75 " : "relative "
           }`
         }
       >
-        some other static content,,,
+        <h1 className=" w-[100px] h-[50px]">Logo</h1>
+        <div className="sm:order-last">image icons</div>
         {breakPoint_sm ? <Navigation_desktop /> : <Navigation_Mobile />}
       </header>
     </>

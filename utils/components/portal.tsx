@@ -1,21 +1,18 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-const transitionCss: { [key: string]: string } = {
-  onExit: "min-h-0",
-  onEnter: "min-h-full",
-};
-
 export default function Portal({
   children,
   containerStyle = "",
   onTransitionEnd,
   trigger,
+  backgroundScroll,
 }: {
   children: React.ReactNode;
   containerStyle: string;
   onTransitionEnd?: () => void;
   trigger?: string;
+  backgroundScroll?: boolean;
 }) {
   const PortalContainer = (
     <div
@@ -23,7 +20,7 @@ export default function Portal({
         `${containerStyle} ` +
         `${
           typeof trigger === "string"
-            ? "transition-all duration-500 " + transitionCss[trigger]
+            ? "transition-all duration-500 " + trigger
             : ""
         }`
       }
@@ -35,6 +32,7 @@ export default function Portal({
 
   const bodyscroll = useRef(0);
   useEffect(() => {
+    if (backgroundScroll) return;
     const body = document.body;
     bodyscroll.current = window.scrollY;
     body.style.cssText = `

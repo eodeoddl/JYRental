@@ -7,7 +7,7 @@ type ObjectKeyTypes<T extends object> = {
 }[keyof T][];
 
 type BreakPoints = {
-  sm: "(min-width : 640px)";
+  md: "(min-width : 640px)";
   lg: "(min-width : 1024px)";
 };
 
