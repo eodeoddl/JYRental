@@ -5,7 +5,8 @@ import Navigation_desktop from "../navigation/navigation_desktop";
 import useMatchMedia from "@/utils/hooks/useMatchMedia";
 import { useEffect, useRef, useState } from "react";
 import Navigation_Mobile from "../navigation/navigation_mobile";
-import { BsCart2, BsPerson } from "react-icons/bs";
+import icons from "./icons.json";
+import { Icon } from "@/utils/components/icon";
 
 export default function Header({ viewport }: { viewport: Viewport }) {
   const breakPoint_sm = useMatchMedia("(min-width : 640px)", viewport);
@@ -28,9 +29,11 @@ export default function Header({ viewport }: { viewport: Viewport }) {
       <div ref={scrollWatcher} />
       <header
         className={[
-          "w-full h-[var(--header-height)] bg-default-gray grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
+          "w-full h-[var(--header-height)]  grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
           `${
-            isScrolled ? "fixed top-0 left-0 bg-default-gray/75" : "relative"
+            isScrolled
+              ? "fixed top-0 left-0 bg-default-gray/75"
+              : "relative bg-transparent"
           }`,
         ].join(" ")}
       >
@@ -44,12 +47,16 @@ export default function Header({ viewport }: { viewport: Viewport }) {
         )}
         {breakPoint_sm && (
           <ul className="justify-self-end flex gap-x-1 ">
-            {[<BsCart2 />, <BsPerson />].map((svgElement, i) => (
+            {icons.map(({ path, viewBox }, i) => (
               <li
                 key={i}
-                className="group overflow-hidden w-8 h-8 p-1 rounded-full bg-default-light-blue"
+                className="group w-8 h-8 rounded-full bg-transparent overflow-hidden cursor-pointer"
               >
-                {svgElement}
+                <Icon
+                  viewBox={viewBox}
+                  path={path}
+                  className="w-full h-full fill-white group-hover:bg-default-dark-gray"
+                />
               </li>
             ))}
           </ul>
@@ -58,7 +65,3 @@ export default function Header({ viewport }: { viewport: Viewport }) {
     </>
   );
 }
-
-// function Icon = () => ()
-// [&_svg]:stroke-default-black
-// [&>li]:bg-transparent [&>li]:rounded-full [&>li]:w-8 [&>li]:h-8 [&>li]:p-1 [&_svg]:w-full [&_svg]:h-full

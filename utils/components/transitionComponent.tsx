@@ -39,3 +39,5 @@ export default function TransitionComponent({
 
   return (isPending || shouldMount) && renderElement(trigger, onTransitionEnd);
 }
+
+// const
