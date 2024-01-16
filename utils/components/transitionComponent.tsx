@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
 
-// type Trigger = "onEnter" | "onExit";
 type OnTransitionEnd = () => void;
 type RenderElement = (
   trigger: string,
@@ -39,5 +38,3 @@ export default function TransitionComponent({
 
   return (isPending || shouldMount) && renderElement(trigger, onTransitionEnd);
 }
-
-// const

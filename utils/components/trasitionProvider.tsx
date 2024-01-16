@@ -1,16 +1,26 @@
-import { createContext, useEffect, useState, useTransition } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 
-export const TriggerContext = createContext<null | string>(null);
-export const RenderDispatchContext = createContext<null | (() => void)>(null);
+const TriggerContext = createContext<null | string>(null);
+const RenderDispatchContext = createContext<null | (() => void)>(null);
 
-export function RenderTransitionProvider({
+export const useTransitionEndDispatcher = () =>
+  useContext(RenderDispatchContext);
+export const useTrigger = () => useContext(TriggerContext);
+
+export default function RenderTransitionProvider({
   children,
   render,
   onEnter,
   onExit,
 }: {
   children: React.ReactNode;
-  render: boolean;
+  render?: boolean;
   onEnter: string;
   onExit: string;
 }) {

@@ -1,6 +1,7 @@
 {
   "data": [
     { "displayName": "홈", "route": "/" },
+    { "displayName": "프린터", "route": "/printer" },
     { "displayName": "제품", "route": "/products" },
     { "displayName": "서비스", "route": "/service" },
     { "displayName": "고객지원", "route": "/clientSupport" },

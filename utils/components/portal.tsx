@@ -1,19 +1,19 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useTransitionEndDispatcher, useTrigger } from "./trasitionProvider";
 
 export default function Portal({
   children,
   containerStyle = "",
-  onTransitionEnd,
-  trigger,
-  backgroundScroll,
+  useScroll,
 }: {
   children: React.ReactNode;
   containerStyle: string;
-  onTransitionEnd?: () => void;
-  trigger?: string;
-  backgroundScroll?: boolean;
+  useScroll?: boolean;
 }) {
+  const transitionDispatcher = useTransitionEndDispatcher();
+  const trigger = useTrigger();
+
   const PortalContainer = (
     <div
       className={
@@ -24,7 +24,7 @@ export default function Portal({
             : ""
         }`
       }
-      onTransitionEnd={onTransitionEnd}
+      onTransitionEnd={transitionDispatcher || undefined}
     >
       {children}
     </div>
@@ -32,7 +32,7 @@ export default function Portal({
 
   const bodyscroll = useRef(0);
   useEffect(() => {
-    if (backgroundScroll) return;
+    if (useScroll) return;
     const body = document.body;
     bodyscroll.current = window.scrollY;
     body.style.cssText = `

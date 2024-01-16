@@ -1,10 +1,10 @@
 "use client";
 
 import Portal from "@/utils/components/portal";
-import TransitionComponent from "@/utils/components/transitionComponent";
 import { useState } from "react";
 import routes from "./routes.json";
 import Link from "next/link";
+import RenderTransitionProvider from "@/utils/components/trasitionProvider";
 
 export default function Navigation_Mobile({
   className,
@@ -39,28 +39,23 @@ export default function Navigation_Mobile({
         ></span>
       </button>
       {/* nav */}
-      <TransitionComponent
+      <RenderTransitionProvider
         render={openModal}
         onExit="h-0"
         onEnter="h-full"
-        renderElement={(trigger, onTransitionEnd) => (
-          <Portal
-            containerStyle="fixed top-[var(--header-height)] left-0 w-full overflow-hidden bg-default-dark-gray/75"
-            trigger={trigger}
-            onTransitionEnd={onTransitionEnd}
-          >
-            <nav>
-              <ul className="flex flex-col pt-10">
-                {routes.data.map(({ displayName, route }) => (
-                  <li key={displayName} className="pl-[20%] py-2">
-                    <Link href={route}>{displayName}</Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </Portal>
-        )}
-      />
+      >
+        <Portal containerStyle="fixed top-[var(--header-height)] left-0 w-full overflow-hidden bg-default-dark-gray/75">
+          <nav>
+            <ul className="flex flex-col pt-10">
+              {routes.data.map(({ displayName, route }) => (
+                <li key={displayName} className="pl-[20%] py-2">
+                  <Link href={route}>{displayName}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </Portal>
+      </RenderTransitionProvider>
     </>
   );
 }
