@@ -1,14 +1,32 @@
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import { Viewport } from "@/types/common";
-import Carousel from "@/utils/components/carousel";
+import Carousel from "@/utils/components/carousel/carousel";
 import { headers } from "next/headers";
 
 // export const getHead = async () => {
 //   await fetch("http://localhost:3000/api", { method: "GET" });
 // };
 
-const carouselMockup = [{}, {}, {}, {}, {}];
+const carouselMockup = [
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+  {},
+];
 
 export default async function Home() {
   const head = headers();
@@ -19,9 +37,9 @@ export default async function Home() {
       <main className="h-[100vh]">
         Home Component
         <Carousel
-          className="w-[300px] h-[200px]"
+          className="w-[80%] h-[50vh] mx-auto"
           data={carouselMockup}
-          amount={2}
+          viewport={viewport as Viewport}
         />
       </main>
       {/* <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-black bg-white text-black">

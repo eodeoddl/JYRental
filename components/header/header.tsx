@@ -37,7 +37,7 @@ export default function Header({ viewport }: { viewport: Viewport }) {
           "w-full h-[var(--header-height)] grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
           `${
             isScrolled
-              ? "fixed top-0 left-0 bg-default-gray/75"
+              ? "fixed top-0 left-0 bg-default-gray/75 backdrop-blur-sm z-50"
               : "relative bg-transparent"
           }`,
         ].join(" ")}

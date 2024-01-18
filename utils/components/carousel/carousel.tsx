@@ -1,6 +1,8 @@
 "use client";
-import { NumericRange } from "@/types/common";
-import React, { useMemo, useReducer, useRef } from "react";
+import { NumericRange, Viewport } from "@/types/common";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
+import CarouselItem from "./carouselItem";
+import useMatchMedia from "@/utils/hooks/useMatchMedia";
 
 type Item = {};
 type ReducerAction = { type: "increase" | "decrease"; containerRange?: number };
@@ -21,61 +23,55 @@ const reducer = (state: number, action: ReducerAction) => {
 
 export default function Carousel({
   className = "",
-  amount,
   data,
+  viewport,
 }: {
   className?: string;
-  amount: NumericRange<1, 3>;
   data: Item[];
+  viewport: Viewport;
 }) {
-  const itemContainerRepeat = useRef(
+  const [slideIndex, dispatch] = useReducer(reducer, 0);
+  const breakPoint_md = useMatchMedia("(min-width : 640px)", viewport);
+  const breakPoint_lg = useMatchMedia("(min-width : 1024px)", viewport);
+  console.log(breakPoint_lg, breakPoint_md);
+
+  const [amount, setAmount] = useState<NumericRange<1, 3>>(1);
+  // console.log(window.visualViewport.width);
+
+  const itemContainerRepeat =
     data.length % amount
       ? Math.ceil(data.length / amount)
-      : data.length / amount,
-  );
-  const [slideIndex, dispatch] = useReducer(reducer, 0);
-
-  const containerItem = useMemo(() => {
-    return Array.from({ length: itemContainerRepeat.current }, (_, i) => {
-      const start = i * amount;
-      const end = start + amount;
-      return data
-        .slice(start, end)
-        .map((_, i) => <div key={i}>item index {start + i}</div>);
-    });
-  }, [data]);
-
-  console.log(containerItem);
-
-  // amount 3 case and data.length = 5
-  // [ [item0 , item1 , itme2 ], [item3 , item4] ] => which Items are use as chilren node property
+      : data.length / amount;
 
   const dynamicStyle = useMemo(
     () =>
-      Array.from({ length: itemContainerRepeat.current }).map((_, i) => ({
+      Array.from({ length: itemContainerRepeat }).map((_, i) => ({
         transform: `translateX(-${i * 100}%)`,
       })),
-    [],
+    [itemContainerRepeat],
   );
+
+  useEffect(() => {
+    console.log("useEffect");
+    if (!breakPoint_md) setAmount(1);
+    else if (breakPoint_md && !breakPoint_lg) setAmount(2);
+    else setAmount(3);
+
+    // console.log(amount);
+  }, [breakPoint_md, breakPoint_lg]);
 
   return (
     <>
-      <div className={["overflow-hidden", className].join(" ")}>
+      <div className={["overflow-hidden border", className].join(" ")}>
         <div
           className="flex h-full transition-transform duration-500"
           style={dynamicStyle[slideIndex]}
         >
-          {[...Array(itemContainerRepeat.current)].map((_, i) => (
-            <div
-              key={i}
-              className={[
-                "flex min-w-full min-h-full text-center text-white",
-                `${i % 2 ? "bg-slate-400" : "bg-slate-500"}`,
-              ].join(" ")}
-            >
-              {containerItem[i]}
-            </div>
-          ))}
+          <CarouselItem
+            items={data}
+            amount={amount}
+            itemContainerRepeat={itemContainerRepeat}
+          />
         </div>
       </div>
       <button
@@ -83,13 +79,12 @@ export default function Carousel({
         onClick={() =>
           dispatch({
             type: "increase",
-            containerRange: itemContainerRepeat.current,
+            containerRange: itemContainerRepeat,
           })
         }
       >
         Increase
       </button>
-      <br />
       <br />
       <br />
       <button

@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 export default function useMatchMedia(
   mediaQueryString: BreakPoints[keyof BreakPoints],
   initialViewport?: Viewport,
-): boolean {
+) {
   const [matches, setMatches] = useState<boolean>(
-    initialViewport !== undefined && initialViewport === "desktop",
+    window.matchMedia(mediaQueryString).matches,
   );
 
   useEffect(() => {
