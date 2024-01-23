@@ -44,7 +44,7 @@ export default function Navigation_Mobile({
         onExit="h-0"
         onEnter="h-full"
       >
-        <Portal containerStyle="fixed top-[var(--header-height)] left-0 w-full overflow-hidden bg-default-dark-gray/75">
+        <Portal containerStyle="fixed top-[var(--header-height)] left-0 w-full overflow-hidden bg-default-dark-gray/75 backdrop-blur-sm">
           <nav>
             <ul className="flex flex-col pt-10">
               {routes.data.map(({ displayName, route }) => (

@@ -1,6 +1,5 @@
 "use client";
 
-import { Viewport } from "@/types/common";
 import { useEffect, useRef, useState } from "react";
 import Navigation_desktop from "../navigation/navigation_desktop";
 import Navigation_Mobile from "../navigation/navigation_mobile";
@@ -10,9 +9,13 @@ import icons from "./icons.json";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Viewport } from "@/types/common";
 
 export default function Header({ viewport }: { viewport: Viewport }) {
-  const breakPoint_sm = useMatchMedia("(min-width : 640px)", viewport);
+  const breakPoint_md = useMatchMedia(
+    "(min-width : 640px)",
+    viewport === "desktop",
+  );
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollWatcher = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -47,12 +50,12 @@ export default function Header({ viewport }: { viewport: Viewport }) {
             <Image src="/logo.png" alt="Logo" fill />
           </Link>
         </h1>
-        {breakPoint_sm ? (
+        {breakPoint_md !== null && breakPoint_md ? (
           <Navigation_desktop />
         ) : (
           <Navigation_Mobile className="justify-self-end" />
         )}
-        {breakPoint_sm && (
+        {breakPoint_md && (
           <ul className="justify-self-end flex gap-x-1 ">
             {icons.map(({ path, viewBox, search }, i) => (
               <li
@@ -65,7 +68,7 @@ export default function Header({ viewport }: { viewport: Viewport }) {
                 <Icon
                   viewBox={viewBox}
                   path={path}
-                  className="w-full h-full fill-white group-hover:bg-default-dark-gray"
+                  className="w-full h-full fill-bg-default-dark-gray group-hover:bg-[#01A0E9]"
                 />
               </li>
             ))}

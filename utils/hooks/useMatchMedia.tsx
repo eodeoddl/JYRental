@@ -1,15 +1,15 @@
-import { BreakPoints, Viewport } from "@/types/common";
+import { BreakPoints } from "@/types/common";
 import { useEffect, useState } from "react";
 
 export default function useMatchMedia(
   mediaQueryString: BreakPoints[keyof BreakPoints],
-  initialViewport?: Viewport,
+  intialMathes?: boolean,
 ) {
-  const [matches, setMatches] = useState<boolean>(
-    window.matchMedia(mediaQueryString).matches,
-  );
+  const [matches, setMatches] = useState<boolean | null>(intialMathes || null);
 
   useEffect(() => {
+    setMatches(window.matchMedia(mediaQueryString).matches);
+
     const mediaQueryList = window.matchMedia(mediaQueryString);
     const handleChange = (e: MediaQueryListEvent) => setMatches(e.matches);
     mediaQueryList.addEventListener("change", handleChange);

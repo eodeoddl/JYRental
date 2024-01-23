@@ -1,11 +1,16 @@
 "use client";
-import { NumericRange, Viewport } from "@/types/common";
-import React, { useEffect, useMemo, useReducer, useState } from "react";
-import CarouselItem from "./carouselItem";
+
 import useMatchMedia from "@/utils/hooks/useMatchMedia";
+import { useEffect, useReducer, useRef, useState } from "react";
+import icons from "./icons.json";
+import { Icon } from "../icon";
+import Image from "next/image";
 
 type Item = {};
-type ReducerAction = { type: "increase" | "decrease"; containerRange?: number };
+type ReducerAction = {
+  type: "increase" | "decrease" | "init";
+  containerRange?: number;
+};
 
 const reducer = (state: number, action: ReducerAction) => {
   let nextState = state;
@@ -17,89 +22,102 @@ const reducer = (state: number, action: ReducerAction) => {
     case "decrease":
       if (state > 0) nextState = state - 1;
       break;
+    case "init":
+      nextState = 0;
+      break;
   }
   return nextState;
 };
 
-export default function Carousel({
+export default function Carousel1({
   className = "",
   data,
-  viewport,
 }: {
   className?: string;
   data: Item[];
-  viewport: Viewport;
 }) {
-  const [slideIndex, dispatch] = useReducer(reducer, 0);
-  const breakPoint_md = useMatchMedia("(min-width : 640px)", viewport);
-  const breakPoint_lg = useMatchMedia("(min-width : 1024px)", viewport);
-  console.log(breakPoint_lg, breakPoint_md);
-
-  const [amount, setAmount] = useState<NumericRange<1, 3>>(1);
-  // console.log(window.visualViewport.width);
-
-  const itemContainerRepeat =
-    data.length % amount
-      ? Math.ceil(data.length / amount)
-      : data.length / amount;
-
-  const dynamicStyle = useMemo(
-    () =>
-      Array.from({ length: itemContainerRepeat }).map((_, i) => ({
-        transform: `translateX(-${i * 100}%)`,
-      })),
-    [itemContainerRepeat],
-  );
+  const slider = useRef<HTMLDivElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+  const breakPoint_sm = useMatchMedia("(min-width : 640px)");
+  const [style, setStyle] = useState<{ transform: string }[]>([]);
+  const [cssIndex, dispatch] = useReducer(reducer, 0);
 
   useEffect(() => {
-    console.log("useEffect");
-    if (!breakPoint_md) setAmount(1);
-    else if (breakPoint_md && !breakPoint_lg) setAmount(2);
-    else setAmount(3);
+    const moveAmount = breakPoint_sm ? 33 : 100;
+    const css = Array.from({
+      length: breakPoint_sm ? Math.ceil(data.length / 3) : data.length,
+    }).map((_, i) => ({ transform: `translateX(-${i * moveAmount}%)` }));
+    setStyle(css);
+    dispatch({ type: "init" });
+  }, [data, breakPoint_sm]);
 
-    // console.log(amount);
-  }, [breakPoint_md, breakPoint_lg]);
+  console.log(style.length - 1, cssIndex);
 
   return (
     <>
-      <div className={["overflow-hidden border", className].join(" ")}>
-        <div
-          className="flex h-full transition-transform duration-500"
-          style={dynamicStyle[slideIndex]}
-        >
-          <CarouselItem
-            items={data}
-            amount={amount}
-            itemContainerRepeat={itemContainerRepeat}
-          />
+      <div ref={slider} className={["relative", className].join(" ")}>
+        <div className="overflow-hidden">
+          <div
+            ref={container}
+            className={[
+              "flex text-center transition-transform duration-500",
+            ].join(" ")}
+            style={style[cssIndex]}
+          >
+            {data.map((_, i) => (
+              <a
+                key={i}
+                className="min-w-full sm:min-w-[33.33333%] h-[40vh] p-2.5 grid grid-rows-[1fr_auto_auto] gap-1.5 cursor-pointer"
+              >
+                <div className="relative">
+                  <Image
+                    src="/itemImage.png"
+                    alt="item"
+                    fill
+                    style={{ objectFit: "contain" }}
+                  />
+                </div>
+                <h3 className="h5-sm sm:h5-lg">Item Index {i}</h3>
+                <p className="truncate paragraph-md">Some other Text...</p>
+                <span className="flex justify-center items-center gap-1.5">
+                  <Icon
+                    path={icons.priceTag.path}
+                    viewBox={icons.priceTag.viewBox}
+                    className="fill-[#01A0E9] w-[20px] h-[19px]"
+                  />
+                  1000원
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
+        <button
+          className="group absolute right-0 top-1/2 -translate-y-2/4 sm:translate-x-full translate-x-2/4 p-2.5"
+          disabled={cssIndex === style.length - 1 || undefined}
+          onClick={() =>
+            dispatch({ type: "increase", containerRange: style.length })
+          }
+        >
+          <Icon
+            path={icons.nextBtn.path}
+            viewBox={icons.nextBtn.viewBox}
+            className="fill-black w-11 group-disabled:fill-btn-gray"
+          />
+        </button>
+        <button
+          className={[
+            "group absolute left-0 top-1/2 -translate-y-2/4 -translate-x-2/4 sm:-translate-x-full p-2.5 ",
+          ].join(" ")}
+          disabled={cssIndex === 0 || undefined}
+          onClick={() => dispatch({ type: "decrease" })}
+        >
+          <Icon
+            path={icons.prevBtn.path}
+            viewBox={icons.prevBtn.viewBox}
+            className="fill-black w-11 group-disabled:fill-btn-gray"
+          />
+        </button>
       </div>
-      <button
-        className=""
-        onClick={() =>
-          dispatch({
-            type: "increase",
-            containerRange: itemContainerRepeat,
-          })
-        }
-      >
-        Increase
-      </button>
-      <br />
-      <br />
-      <button
-        className=""
-        onClick={() =>
-          dispatch({
-            type: "decrease",
-          })
-        }
-      >
-        Decrease
-      </button>
     </>
   );
 }
-
-// moblie response touch screen,
-// blocking list item tab
