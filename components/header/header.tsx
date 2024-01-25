@@ -40,7 +40,7 @@ export default function Header({ viewport }: { viewport: Viewport }) {
           "w-full h-[var(--header-height)] grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
           `${
             isScrolled
-              ? "fixed top-0 left-0 bg-default-gray/75 backdrop-blur-sm z-50"
+              ? "fixed top-0 left-0 bg-white/75 z-50"
               : "relative bg-transparent"
           }`,
         ].join(" ")}
@@ -50,29 +50,31 @@ export default function Header({ viewport }: { viewport: Viewport }) {
             <Image src="/logo.png" alt="Logo" fill />
           </Link>
         </h1>
-        {breakPoint_md !== null && breakPoint_md ? (
-          <Navigation_desktop />
+        {breakPoint_md ? (
+          <>
+            <Navigation_desktop />
+            <ul className="justify-self-end flex gap-x-1">
+              {icons.map(({ path, viewBox, search }, i) => (
+                <li
+                  key={i}
+                  className="group w-8 h-8 rounded-full bg-transparent overflow-hidden cursor-pointer"
+                  onClick={() =>
+                    router.push(`${pathname}?modal=${search}`, {
+                      scroll: false,
+                    })
+                  }
+                >
+                  <Icon
+                    viewBox={viewBox}
+                    path={path}
+                    className="w-full h-full fill-default-dark-gray group-hover:bg-[#01A0E9]"
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
         ) : (
           <Navigation_Mobile className="justify-self-end" />
-        )}
-        {breakPoint_md && (
-          <ul className="justify-self-end flex gap-x-1 ">
-            {icons.map(({ path, viewBox, search }, i) => (
-              <li
-                key={i}
-                className="group w-8 h-8 rounded-full bg-transparent overflow-hidden cursor-pointer"
-                onClick={() =>
-                  router.push(`${pathname}?modal=${search}`, { scroll: false })
-                }
-              >
-                <Icon
-                  viewBox={viewBox}
-                  path={path}
-                  className="w-full h-full fill-bg-default-dark-gray group-hover:bg-[#01A0E9]"
-                />
-              </li>
-            ))}
-          </ul>
         )}
       </header>
     </>

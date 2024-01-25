@@ -8,7 +8,7 @@ export default function Navigation_desktop({
 }) {
   return (
     <nav className={className}>
-      <ul className="flex justify-center gap-4">
+      <ul className="flex justify-center gap-4 text-default-dark-gray text-bold text-lg">
         {routes.data.map(({ displayName, route }) => (
           <li key={displayName}>
             <Link href={route}>{displayName}</Link>

@@ -33,11 +33,6 @@ const config: Config = {
         header: "minmax(auto, 100px) 1fr",
         "header-lg": "100px 1fr auto",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         primary: {
           blue: "#01A0E9",

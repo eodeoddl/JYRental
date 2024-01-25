@@ -49,5 +49,5 @@ export default function Portal({
     };
   }, []);
 
-  return createPortal(PortalContainer, document.body);
+  return document && createPortal(PortalContainer, document.body);
 }

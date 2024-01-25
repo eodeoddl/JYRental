@@ -15,11 +15,14 @@ module.exports = buttonPlugin.withOptions(
   (
     options = {
       style: {
-        width: "209px",
-        height: "63px",
-        padding: "18px 60px",
+        width: "130px",
+        height: "40px",
+        padding: "10px",
         "border-radius": "30px",
-        "font-size": "20px",
+        "font-size": "16px",
+        display: "flex",
+        "justify-content": "center",
+        "align-items": "center",
       },
     },
   ) =>
@@ -41,7 +44,7 @@ module.exports = buttonPlugin.withOptions(
 
           "&:hover": {
             color: theme("colors.default.black"),
-            "background-color": theme("colors.default.gray"),
+            "background-color": theme("colors.btn.gray"),
           },
         },
 
@@ -71,7 +74,7 @@ module.exports = buttonPlugin.withOptions(
             width: "100%",
             height: "4px",
             "border-radius": "4px",
-            "background-color": "white",
+            "background-color": theme("colors.default.dark-gray"),
             transition: theme("transitionProperty.all"),
             "transition-duration": theme("transitionDuration.500"),
           },

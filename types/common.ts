@@ -8,14 +8,14 @@ type ObjectKeyTypes<T extends object> = {
 
 // type numbericRange<> =
 
-type NumericRange<
+type NumbericRange<
   START extends number,
   END extends number,
   ARR extends unknown[] = [],
   ACC extends number = never,
 > = ARR["length"] extends END
   ? ACC | START | END
-  : NumericRange<
+  : NumbericRange<
       START,
       END,
       [...ARR, 1],
@@ -32,7 +32,7 @@ type Viewport = "mobile" | "desktop" | null;
 export type {
   EntrieTypes,
   ObjectKeyTypes,
-  NumericRange,
+  NumbericRange,
   BreakPoints,
   Viewport,
 };

@@ -51,8 +51,6 @@ export default function Carousel1({
     dispatch({ type: "init" });
   }, [data, breakPoint_sm]);
 
-  console.log(style.length - 1, cssIndex);
-
   return (
     <>
       <div ref={slider} className={["relative", className].join(" ")}>

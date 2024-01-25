@@ -13,7 +13,7 @@ export default function CartModal() {
       onExit="opacity-0 -translate-y-full"
     >
       <Portal
-        containerStyle="fixed top-[10%] right-[10%] w-[300px] lg:w-[500px] h-[80vh] overflow-hidden rounded-2xl"
+        containerStyle="fixed top-[10%] right-[10%] w-[300px] lg:w-[500px] h-[80vh] overflow-hidden rounded-2xl border z-50"
         useScroll
       >
         <div className="relative w-full h-full bg-white text-black p-3.5">

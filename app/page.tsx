@@ -1,7 +1,9 @@
 import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
+import Main from "@/components/home/main";
 import { Viewport } from "@/types/common";
-import Carousel1 from "@/utils/components/carousel/carousel";
+import Carousel from "@/utils/components/carousel/carousel";
+import PageNation from "@/utils/components/pagination/pagenation";
 import { headers } from "next/headers";
 // import dynamic from "next/dynamic";
 
@@ -36,17 +38,17 @@ export default async function Home() {
   return (
     <>
       <Header viewport={viewport as Viewport} />
-      <main className="h-full">
-        Home Component
-        {/* <Carousel className="w-[80%] h-[50vh] mx-auto" data={carouselMockup} /> */}
-        <Carousel1 className="w-[80%] mx-auto" data={carouselMockup} />
-        <Carousel1 className="w-[80%] mx-auto" data={carouselMockup1} />
-      </main>
+      <Main />
+      {/* <main className="h-full">
+        <Carousel className="w-[80%] mx-auto" data={carouselMockup} />
+        <Carousel className="w-[80%] mx-auto" data={carouselMockup1} />
+        <PageNation totalData={51} dataInView={5} />
+      </main> */}
       {/* <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-black bg-white text-black">
         AAAAAA
       </button>
       <button className="btn">BBBBB</button> */}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
