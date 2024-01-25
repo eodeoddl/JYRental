@@ -61,7 +61,7 @@ module.exports = buttonPlugin.withOptions(
         },
 
         ".btn-before-animate": {
-          transition: "transform 1s",
+          transition: "transform .3s",
           transform: "translate(0)",
         },
 

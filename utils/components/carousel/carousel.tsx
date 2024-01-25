@@ -29,7 +29,7 @@ const reducer = (state: number, action: ReducerAction) => {
   return nextState;
 };
 
-export default function Carousel1({
+export default function Carousel({
   className = "",
   data,
 }: {
@@ -72,6 +72,7 @@ export default function Carousel1({
                     src="/itemImage.png"
                     alt="item"
                     fill
+                    // sizes={"(min-width: 640px): 33vw, 100vw"}
                     style={{ objectFit: "contain" }}
                   />
                 </div>

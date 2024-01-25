@@ -2,7 +2,6 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Main from "@/components/home/main";
 import { Viewport } from "@/types/common";
-import Carousel from "@/utils/components/carousel/carousel";
 import PageNation from "@/utils/components/pagination/pagenation";
 import { headers } from "next/headers";
 // import dynamic from "next/dynamic";
@@ -48,7 +47,7 @@ export default async function Home() {
         AAAAAA
       </button>
       <button className="btn">BBBBB</button> */}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

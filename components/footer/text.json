@@ -1,0 +1,16 @@
+{
+  "quickLinks": [
+    { "text": "link1" },
+    { "text": "link1" },
+    { "text": "link1" },
+    { "text": "link1" },
+    { "text": "link1" },
+    { "text": "link1" }
+  ],
+  "customerResources": [{ "text": "배송&반품" }, { "text": "임대조건" }],
+  "contact": [
+    { "text": "이메일 주소", "icon": "email" },
+    { "text": "핸드폰 번호", "icon": "phone" },
+    { "text": "위치", "icon": "location" }
+  ]
+}
