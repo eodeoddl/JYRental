@@ -18,7 +18,7 @@ export default function Section5() {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <span className="inline-block">
+            <span className="inline-block mt-5">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry
             </span>

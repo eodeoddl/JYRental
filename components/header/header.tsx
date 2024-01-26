@@ -47,7 +47,7 @@ export default function Header({ viewport }: { viewport: Viewport }) {
       >
         <h1 className="cursor-pointer">
           <Link href="/" className="relative block w-full h-[50px]">
-            <Image src="/logo.png" alt="Logo" fill />
+            <Image src="/logo.png" alt="Logo" fill sizes={"100vw"} />
           </Link>
         </h1>
         {breakPoint_md ? (

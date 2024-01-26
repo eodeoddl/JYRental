@@ -7,7 +7,7 @@ export default function Section1() {
         <h2 className="h2-sm sm:h2-lg trucate sm:whitespace-normal break-words">
           TextTextTextText
         </h2>
-        <p className="paragraph-md max-h-[500px] sm:whitespace-normal">
+        <p className="paragraph-md max-h-[500px] sm:whitespace-normal my-5">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and

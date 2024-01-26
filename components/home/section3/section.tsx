@@ -7,9 +7,9 @@ export default function Section3() {
       <h2 className="h2-sm sm:h2-lg trucate sm:whitespace-normal break-words">
         Services
       </h2>
-      <div className="flex flex-col sm:flex-row gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
         {images.map(({ url, alt }) => (
-          <div key={url} className="min-w-full sm:min-w-[33.33%]">
+          <div key={url}>
             <div key={url} className="relative w-full h-[250px]">
               <Image
                 src={url}
@@ -18,7 +18,7 @@ export default function Section3() {
                 style={{ objectFit: "contain" }}
               />
             </div>
-            <span className="inline-block">
+            <span className="inline-block my-5">
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry.
             </span>

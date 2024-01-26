@@ -28,7 +28,7 @@ export default function Main() {
   // const styles = useRef({});
 
   return (
-    <main className="grid grid-cols-1 gap-5 w-[80%] mx-auto">
+    <main className="grid grid-cols-1 gap-5 sm:gap-10 w-[80%] mx-auto">
       <Section1 />
       <Section2 carouselMockup={carouselMockup} />
       <Section3 />

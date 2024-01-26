@@ -3,7 +3,7 @@ import Carousel from "@/utils/components/carousel/carousel";
 export default function Section2({ carouselMockup }) {
   return (
     <section>
-      <div className="text-center">
+      <div className="text-center mb-8">
         <h2 className="h2-sm sm:h2-lg trucate sm:whitespace-normal break-words">
           Rent Printers
         </h2>
@@ -19,7 +19,7 @@ export default function Section2({ carouselMockup }) {
           including versions of Lorem Ipsum.
         </p>
       </div>
-      <Carousel className="w-full" data={carouselMockup} />
+      <Carousel className="w-full mb-8" data={carouselMockup} />
       <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-[#808080] bg-btn-light-orange text-white mx-auto">
         지금 렌트하기
       </button>
