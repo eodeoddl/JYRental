@@ -1,0 +1,9 @@
+[
+  {
+    "name": "계정",
+    "slot": "profile"
+  },
+  { "name": "주문", "slot": "orderHistory" },
+  { "name": "저장된 품목", "slot": "savedItem" },
+  { "name": "주소", "slot": "address" }
+]

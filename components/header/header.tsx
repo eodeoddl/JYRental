@@ -8,8 +8,10 @@ import { Icon } from "@/utils/components/icon";
 import icons from "./icons.json";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Viewport } from "@/types/common";
+
+const loginValue = false;
 
 export default function Header({ viewport }: { viewport: Viewport }) {
   const breakPoint_md = useMatchMedia(
@@ -19,7 +21,6 @@ export default function Header({ viewport }: { viewport: Viewport }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollWatcher = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     if (!scrollWatcher.current) return;
@@ -55,20 +56,21 @@ export default function Header({ viewport }: { viewport: Viewport }) {
             <Navigation_desktop />
             <ul className="justify-self-end flex gap-x-1">
               {icons.map(({ path, viewBox, search }, i) => (
-                <li
-                  key={i}
-                  className="group w-8 h-8 rounded-full bg-transparent overflow-hidden cursor-pointer"
-                  onClick={() =>
-                    router.push(`${pathname}?modal=${search}`, {
-                      scroll: false,
-                    })
-                  }
-                >
-                  <Icon
-                    viewBox={viewBox}
-                    path={path}
-                    className="w-full h-full fill-default-dark-gray group-hover:bg-[#01A0E9]"
-                  />
+                <li key={i}>
+                  <Link
+                    href={{
+                      pathname,
+                      query: { modal: search },
+                    }}
+                    scroll={false}
+                    className="group inline-block rounded-full overflow-hidden"
+                  >
+                    <Icon
+                      viewBox={viewBox}
+                      path={path}
+                      className="w-10 h-10 p-1 fill-default-dark-gray bg-transparent group-hover:bg-[#01A0E9]"
+                    />
+                  </Link>
                 </li>
               ))}
             </ul>

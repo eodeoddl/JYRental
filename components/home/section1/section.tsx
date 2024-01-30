@@ -18,11 +18,11 @@ export default function Section1() {
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
         </p>
-        <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-[#808080] bg-btn-light-orange text-white mx-auto sm:mx-0">
+        <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-[#808080] bg-btn-light-orange text-white">
           Button
         </button>
       </div>
-      <div className="relative order-first sm:order-last">
+      <div className="relative">
         <Image
           src="/img1.png"
           alt="product_image"

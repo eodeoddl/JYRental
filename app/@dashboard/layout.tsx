@@ -1,10 +1,10 @@
 import UserProfileMenu from "@/components/user/userProfileMenu/userProfileMenu";
 
-export default function PrinterPage() {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      Pringer Page
+    <>
       <UserProfileMenu />
-    </div>
+      {children}
+    </>
   );
 }

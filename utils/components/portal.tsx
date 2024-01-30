@@ -49,5 +49,7 @@ export default function Portal({
     };
   }, []);
 
-  return document && createPortal(PortalContainer, document.body);
+  return typeof window === "object"
+    ? createPortal(PortalContainer, document.body)
+    : null;
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/header/header";
+import { headers } from "next/headers";
+import { Viewport } from "@/types/common";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +21,12 @@ export default function RootLayout({
   cartModal: React.ReactNode;
   accountModal: React.ReactNode;
 }) {
+  const header = headers();
+  const viewport = header.get("viewport");
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Header viewport={viewport as Viewport} />
         {children}
         {accountModal}
         {cartModal}

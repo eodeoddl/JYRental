@@ -2,11 +2,11 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 // import type { NextRequest } from "next/server";
 
-export async function GET(request: Request) {
-  console.log("api get");
+// export async function GET(request: Request) {
+//   console.log("api get");
 
-  return new NextResponse("TLqkf ", { status: 200, headers: { referer: "" } });
-}
+//   return new NextResponse("TLqkf ", { status: 200, headers: { referer: "" } });
+// }
 
 // export async function Head(request: NextRequest) {
 //   console.log("api head ");
