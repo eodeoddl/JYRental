@@ -23,6 +23,7 @@ export default function RootLayout({
 }) {
   const header = headers();
   const viewport = header.get("viewport");
+  console.log("root layout renderd");
   return (
     <html lang="en">
       <body className={inter.className}>

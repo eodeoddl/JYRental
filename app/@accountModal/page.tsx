@@ -2,7 +2,7 @@
 import Login from "@/components/user/login/loginForm";
 import Portal from "@/utils/components/portal";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function AccountModal() {
   const searchParams = useSearchParams();
@@ -10,14 +10,6 @@ export default function AccountModal() {
   const closeButtonStyle = useRef(
     "absolute top-2/4 -translate-y-2/4 w-full h-0.5 bg-black rounded",
   );
-
-  // const portalContainer = useRef<HTMLDivElement>();
-
-  // useEffect(() => {
-  //   if (portalContainer.current) {
-  //     portalContainer.current.addEventListener("click", () => router.back());
-  //   }
-  // }, []);
 
   return (
     searchParams.get("modal") === "account" && (

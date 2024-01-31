@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 export default function CartModal() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  console.log("render cart modal");
   return (
     <RenderTransitionProvider
       render={searchParams.get("modal") === "cart"}
