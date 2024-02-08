@@ -4,7 +4,7 @@ import Portal from "@/utils/components/portal";
 import { useState } from "react";
 import routes from "./routes.json";
 import Link from "next/link";
-import RenderTransitionProvider from "@/utils/components/trasitionProvider";
+import RenderTransitionProvider from "@/utils/components/providers/trasitionProvider";
 
 export default function Navigation_Mobile({
   className,

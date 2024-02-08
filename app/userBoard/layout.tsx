@@ -1,9 +1,8 @@
-import Tab from "@/utils/components/tab/tab";
 import TabGroup from "@/utils/components/tab/tabGroup";
 
 export default function Layout({ tabItems }: { tabItems: React.ReactNode }) {
   return (
-    <div className="">
+    <>
       <TabGroup
         items={[
           { text: "계정", slug: "" },
@@ -14,6 +13,6 @@ export default function Layout({ tabItems }: { tabItems: React.ReactNode }) {
         path="/userBoard"
       />
       {tabItems}
-    </div>
+    </>
   );
 }

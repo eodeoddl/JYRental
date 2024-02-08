@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useTransitionEndDispatcher, useTrigger } from "./trasitionProvider";
+import {
+  useTransitionEndDispatcher,
+  useTrigger,
+} from "./providers/trasitionProvider";
 
 export default function Portal({
   children,

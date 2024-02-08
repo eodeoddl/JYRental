@@ -8,10 +8,9 @@ import { Icon } from "@/utils/components/icon";
 import icons from "./icons.json";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Viewport } from "@/types/common";
-
-const loginValue = false;
+import usePositionContext from "@/utils/hooks/usePosition";
+import { usePathname } from "next/navigation";
 
 export default function Header({ viewport }: { viewport: Viewport }) {
   const breakPoint_md = useMatchMedia(
@@ -20,7 +19,26 @@ export default function Header({ viewport }: { viewport: Viewport }) {
   );
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollWatcher = useRef<HTMLDivElement>(null);
+  const modalPositionRef = useRef<any>(null);
+  const header = useRef<any>(null);
+  const dispatcher = usePositionContext();
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (!modalPositionRef.current || !header.current) return;
+
+    const ro = new ResizeObserver(() => {
+      dispatcher("addDomRect", {
+        domName: "accountMenuPosition",
+        domRect: modalPositionRef.current.getBoundingClientRect(),
+      });
+    });
+    ro.observe(header.current);
+
+    return () => {
+      ro.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (!scrollWatcher.current) return;
@@ -37,6 +55,7 @@ export default function Header({ viewport }: { viewport: Viewport }) {
     <>
       <div ref={scrollWatcher} />
       <header
+        ref={header}
         className={[
           "w-full h-[var(--header-height)] grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
           `${
@@ -55,13 +74,16 @@ export default function Header({ viewport }: { viewport: Viewport }) {
           <>
             <Navigation_desktop />
             <ul className="justify-self-end flex gap-x-1">
-              {icons.map(({ path, viewBox, search }, i) => (
-                <li key={i}>
+              {icons.map(({ path, viewBox, slug, search }, i) => (
+                <li
+                  key={i}
+                  ref={el => {
+                    if (search === "account") modalPositionRef.current = el;
+                  }}
+                >
                   <Link
-                    href={{
-                      pathname,
-                      query: { modal: search },
-                    }}
+                    // href={"/" + slug}
+                    href={{ pathname, query: { dialog: search } }}
                     scroll={false}
                     className="group inline-block rounded-full overflow-hidden"
                   >

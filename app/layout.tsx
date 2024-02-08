@@ -4,6 +4,9 @@ import "./globals.css";
 import Header from "@/components/header/header";
 import { headers } from "next/headers";
 import { Viewport } from "@/types/common";
+import React from "react";
+import CartDialog from "@/components/dialogs/cartDialog";
+import AccountDialog from "@/components/dialogs/accountDialog/accountDialog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,23 +17,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  cartModal,
-  accountModal,
 }: {
   children: React.ReactNode;
-  cartModal: React.ReactNode;
-  accountModal: React.ReactNode;
 }) {
   const header = headers();
   const viewport = header.get("viewport");
-  console.log("root layout renderd");
   return (
     <html lang="en">
       <body className={inter.className}>
         <Header viewport={viewport as Viewport} />
         {children}
-        {accountModal}
-        {cartModal}
+        <CartDialog />
+        <AccountDialog />
       </body>
     </html>
   );

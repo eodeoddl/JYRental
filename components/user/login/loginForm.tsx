@@ -1,6 +1,7 @@
+"use client";
 import Link from "next/link";
 
-export default function Login() {
+export default function LoginForm() {
   return (
     <form className="w-full grid grid-cols-1 gap-3 p-8">
       <span className="text-center text-xl font-bold">

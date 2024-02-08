@@ -1,8 +1,9 @@
 "use client";
-import { MouseEvent, MouseEventHandler, useRef, useState } from "react";
+import { MouseEvent, MouseEventHandler, useRef } from "react";
 import { Icon } from "../icon";
 import icons from "./icons.json";
 import { NumbericRange } from "@/types/common";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function PageNation({
   totalData,
@@ -13,38 +14,56 @@ export default function PageNation({
   pageAmount?: NumbericRange<1, 3>;
   dataInView: number;
 }) {
-  const [pageIndex, setPageIndex] = useState(0); // totalpage of index
-  const [pageGroupIndex, setPageGroupIndex] = useState(0);
   const totalPage = useRef(Math.ceil(totalData / dataInView));
   const totalPageGroup = useRef(Math.ceil(totalPage.current / dataInView));
   const style = useRef({
     "list-hover": "hover:border-2 cursor-pointer",
-    "list-style": "flex items-center justify-center rounded-full w-6 h-6 p-1",
+    "list-style":
+      "flex items-center justify-center rounded-full w-8 h-8 p-2 rounded-full text-center",
   });
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const currentPageIndex = Number(searchParams.get("pageIndex")) || 0;
+  const currentPageGroupIndex = Number(searchParams.get("pageGroupIndex")) || 0;
 
-  console.log(pageIndex, pageGroupIndex, pageAmount * pageGroupIndex);
+  const generatePageURL = (pageIndex: number, pageGroupIndex: number) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("pageIndex", pageIndex.toString());
+    params.set("pageGroupIndex", pageGroupIndex.toString());
+    return `${pathname}?${params.toString()}`;
+  };
+
   const handleOnClickButton: MouseEventHandler = (
     e: MouseEvent<HTMLButtonElement>,
   ) => {
     const direction = e.currentTarget.dataset.btn === "prev" ? -1 : 1;
-    const nextPage = pageIndex + direction;
+    const nextPage = currentPageIndex + direction;
+    const lastIndexInPageGroup = pageAmount * (currentPageGroupIndex + 1) - 1;
+    const firstIndexInPageGroup = pageAmount * currentPageGroupIndex;
 
-    // page index update
-    setPageIndex(prev => {
-      if (nextPage < 0 || nextPage > totalPage.current - 1) return prev;
-      return nextPage;
-    });
+    const pageIndex =
+      nextPage < 0 || nextPage > totalPage.current - 1
+        ? currentPageIndex
+        : nextPage;
 
-    // group index update
-    if (nextPage > pageAmount - 1 && direction === 1) {
-      const lastIndexInPageGroup = pageAmount * (pageGroupIndex + 1) - 1;
-      if (lastIndexInPageGroup < nextPage) setPageGroupIndex(prev => prev + 1);
-    }
+    const pageGroupIndex = (() => {
+      if (
+        nextPage > pageAmount - 1 &&
+        direction === 1 &&
+        lastIndexInPageGroup < nextPage
+      )
+        return currentPageGroupIndex + 1;
+      else if (
+        currentPageGroupIndex > 0 &&
+        direction === -1 &&
+        firstIndexInPageGroup > nextPage
+      )
+        return currentPageGroupIndex - 1;
+      else return currentPageGroupIndex;
+    })();
 
-    if (pageGroupIndex > 0 && direction === -1) {
-      const firstIndexInPageGroup = pageAmount * pageGroupIndex;
-      if (firstIndexInPageGroup > nextPage) setPageGroupIndex(prev => prev - 1);
-    }
+    router.push(generatePageURL(pageIndex, pageGroupIndex));
   };
 
   const handleOnClickListItem: MouseEventHandler = (
@@ -53,28 +72,29 @@ export default function PageNation({
     const index = Number(e.currentTarget.dataset.index);
 
     if (index === 0) {
-      setPageIndex(0);
-      setPageGroupIndex(0);
+      router.push(generatePageURL(0, 0));
     } else if (index === totalPage.current) {
-      setPageIndex(
-        pageAmount * totalPageGroup.current +
-          (totalPage.current % totalPageGroup.current) -
-          1,
+      router.push(
+        generatePageURL(
+          pageAmount * totalPageGroup.current +
+            (totalPage.current % totalPageGroup.current) -
+            1,
+          totalPageGroup.current,
+        ),
       );
-      setPageGroupIndex(totalPageGroup.current);
     } else {
-      setPageIndex(index);
+      router.push(generatePageURL(index, currentPageGroupIndex));
     }
   };
 
   return (
-    <div className="flex h-6 text-bold leading-4 text-lg">
+    <div className="flex items-center text-bold leading-4 text-lg">
       {/* Left Button */}
       <button
         data-btn="prev"
         className="group"
         onClick={handleOnClickButton}
-        disabled={pageIndex === 0 || undefined}
+        disabled={currentPageIndex === 0 || undefined}
       >
         <Icon
           path={icons.arrowLeft.path}
@@ -85,7 +105,7 @@ export default function PageNation({
       {/* Page Index Group */}
       <ul className="flex gap-1.5 mx-3">
         {/*  */}
-        {pageGroupIndex > 0 && (
+        {currentPageGroupIndex > 0 && (
           <>
             <li
               data-index={0}
@@ -103,28 +123,30 @@ export default function PageNation({
         {/*  */}
         {Array.from({
           length:
-            pageGroupIndex === totalPageGroup.current
+            currentPageGroupIndex === totalPageGroup.current
               ? totalPage.current % totalPageGroup.current
               : pageAmount,
         }).map((_, i) => (
           <li
             key={i}
-            data-index={pageAmount * pageGroupIndex + i}
+            data-index={pageAmount * currentPageGroupIndex + i}
             onClick={handleOnClickListItem}
             className={[
               style.current["list-style"],
               `${
-                pageAmount * pageGroupIndex + i === pageIndex
+                pageAmount * currentPageGroupIndex + i === currentPageIndex
                   ? "bg-btn-light-blue"
                   : style.current["list-hover"]
               }`,
             ].join(" ")}
           >
-            {pageAmount * pageGroupIndex + 1 + i}
+            <span className="inline-block ">
+              {pageAmount * currentPageGroupIndex + 1 + i}
+            </span>
           </li>
         ))}
         {/*  */}
-        {pageGroupIndex < totalPageGroup.current && (
+        {currentPageGroupIndex < totalPageGroup.current && (
           <>
             <li className={style.current["list-style"]}>...</li>
             <li
@@ -135,7 +157,7 @@ export default function PageNation({
                 style.current["list-hover"],
               ].join(" ")}
             >
-              {totalPage.current}
+              <span className="inline-block">{totalPage.current}</span>
             </li>
           </>
         )}
@@ -145,7 +167,7 @@ export default function PageNation({
         data-btn="next"
         className="group"
         onClick={handleOnClickButton}
-        disabled={pageIndex === totalPage.current - 1 || undefined}
+        disabled={currentPageIndex === totalPage.current - 1 || undefined}
       >
         <Icon
           path={icons.arrowRight.path}
