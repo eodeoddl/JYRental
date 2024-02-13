@@ -15,7 +15,7 @@ module.exports = buttonPlugin.withOptions(
   (
     options = {
       style: {
-        width: "130px",
+        width: "fit-content",
         height: "40px",
         padding: "10px",
         "border-radius": "30px",
@@ -53,7 +53,7 @@ module.exports = buttonPlugin.withOptions(
           position: "absolute",
           top: 0,
           left: 0,
-          width: "inherit",
+          width: "100%",
           height: "100%",
           transform: "translateX(-100%)",
           zIndex: -theme("zIndex.10"),

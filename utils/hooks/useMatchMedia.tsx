@@ -1,5 +1,5 @@
 import { BreakPoints } from "@/types/common";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function useMatchMedia(
   mediaQueryString: BreakPoints[keyof BreakPoints],
@@ -7,7 +7,7 @@ export default function useMatchMedia(
 ) {
   const [matches, setMatches] = useState<boolean | null>(intialMathes || null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMatches(window.matchMedia(mediaQueryString).matches);
 
     const mediaQueryList = window.matchMedia(mediaQueryString);
@@ -19,5 +19,5 @@ export default function useMatchMedia(
     };
   }, []);
 
-  return matches;
+  return typeof window === "object" && matches;
 }

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Navigation_desktop from "../navigation/navigation_desktop";
 import Navigation_Mobile from "../navigation/navigation_mobile";
-import useMatchMedia from "@/utils/hooks/useMatchMedia";
 import { Icon } from "@/utils/components/icon";
 import icons from "./icons.json";
 import Image from "next/image";
@@ -13,10 +12,6 @@ import usePositionContext from "@/utils/hooks/usePosition";
 import { usePathname } from "next/navigation";
 
 export default function Header({ viewport }: { viewport: Viewport }) {
-  const breakPoint_md = useMatchMedia(
-    "(min-width : 640px)",
-    viewport === "desktop",
-  );
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollWatcher = useRef<HTMLDivElement>(null);
   const modalPositionRef = useRef<any>(null);
@@ -70,36 +65,30 @@ export default function Header({ viewport }: { viewport: Viewport }) {
             <Image src="/logo.png" alt="Logo" fill sizes={"100vw"} />
           </Link>
         </h1>
-        {breakPoint_md ? (
-          <>
-            <Navigation_desktop />
-            <ul className="justify-self-end flex gap-x-1">
-              {icons.map(({ path, viewBox, slug, search }, i) => (
-                <li
-                  key={i}
-                  ref={el => {
-                    if (search === "account") modalPositionRef.current = el;
-                  }}
-                >
-                  <Link
-                    // href={"/" + slug}
-                    href={{ pathname, query: { dialog: search } }}
-                    scroll={false}
-                    className="group inline-block rounded-full overflow-hidden"
-                  >
-                    <Icon
-                      viewBox={viewBox}
-                      path={path}
-                      className="w-10 h-10 p-1 fill-default-dark-gray bg-transparent group-hover:bg-[#01A0E9]"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <Navigation_Mobile className="justify-self-end" />
-        )}
+        <Navigation_desktop className="hidden sm:block" />
+        <ul className="hidden sm:flex justify-self-end gap-x-1 ">
+          {icons.map(({ path, viewBox, search }, i) => (
+            <li
+              key={i}
+              ref={el => {
+                if (search === "account") modalPositionRef.current = el;
+              }}
+            >
+              <Link
+                href={{ pathname, query: { dialog: search } }}
+                scroll={false}
+                className="group inline-block rounded-full overflow-hidden"
+              >
+                <Icon
+                  viewBox={viewBox}
+                  path={path}
+                  className="w-10 h-10 p-1 fill-default-dark-gray bg-transparent group-hover:bg-[#01A0E9]"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Navigation_Mobile className="block sm:hidden justify-self-end" />
       </header>
     </>
   );

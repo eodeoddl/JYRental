@@ -14,9 +14,8 @@ export default function Navigation_Mobile({
   const [openModal, setOpenModal] = useState(false);
   return (
     <>
-      {/* button  */}
       <button
-        className={`btn-burger w-8 h-8 ${className}`}
+        className={`${className} btn-burger w-8 h-8 `}
         onClick={() => setOpenModal(prev => !prev)}
       >
         <span
@@ -38,7 +37,6 @@ export default function Navigation_Mobile({
           ].join(" ")}
         ></span>
       </button>
-      {/* nav */}
       <RenderTransitionProvider
         render={openModal}
         onExit="h-0"
