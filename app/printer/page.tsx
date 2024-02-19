@@ -4,6 +4,8 @@ import M_Filter from "@/components/products/filter_mobile";
 import Product_Menu from "@/components/products/product_menu";
 import Products from "@/components/products/products";
 import PageNation from "@/utils/components/pagination/pagenation";
+
+// need fetching data from server
 const items = Array.from({ length: 84 }, (_, i) => ({
   productId: 33,
   productName: "title" + i,
@@ -26,10 +28,9 @@ export default async function PrinterPage({
 }: {
   searchParams: { pageIndex: number };
 }) {
-  console.log("server component search params", searchParams);
   const dataInView = 4;
 
-  // need items all length by filter value then use as provider Props
+  // need items all length by filter value then use as pagenation Props
   const totalData = 84; // fetching by server
   const { pageIndex } = searchParams;
 

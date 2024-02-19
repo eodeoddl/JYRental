@@ -5,6 +5,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import icons from "./icons.json";
 import { Icon } from "../icon";
 import Image from "next/image";
+import PriceTag from "@/components/priceTag/priceTag";
 
 type Item = {};
 type ReducerAction = {
@@ -81,11 +82,7 @@ export default function Carousel({
                 <h3 className="h5-sm sm:h5-lg">Item Index {i}</h3>
                 <p className="truncate paragraph-md">Some other Text...</p>
                 <span className="flex justify-center items-center gap-1.5">
-                  <Icon
-                    path={icons.priceTag.path}
-                    viewBox={icons.priceTag.viewBox}
-                    className="fill-[#01A0E9] w-[20px] h-[19px]"
-                  />
+                  <PriceTag color="blue" />
                   1000원
                 </span>
               </a>

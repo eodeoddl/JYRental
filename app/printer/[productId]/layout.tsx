@@ -21,6 +21,7 @@ export default function Layout({
           { text: "비슷한 제품", slug: "similar" },
         ]}
         path={`/printer/${params.productId}`}
+        className="mb-5"
       />
       {tabItems}
       <Footer />
