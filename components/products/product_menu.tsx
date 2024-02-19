@@ -1,5 +1,5 @@
 import { Icon } from "@/utils/components/icon";
-import icons from "./icons.json";
+import icons from "./assets/iconsproduct.json";
 
 export default function Product_Menu({ totalData }: { totalData: number }) {
   return (

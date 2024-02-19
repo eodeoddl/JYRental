@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
-import icons from "./icons.json";
+import icons from "./assets/iconsproduct.json";
 import { Icon } from "@/utils/components/icon";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import PurchaseBtn from "./buttons/purchaseBtn";
+import RentBtn from "./buttons/rentBtn";
+import AddCartBtn from "./buttons/addCartBtn";
 
 type Items = {
   productId: number;
@@ -15,7 +18,6 @@ type Items = {
 }[];
 
 export default function Products({ items }: { items: Items }) {
-  const router = useRouter();
   const pathname = usePathname();
   return (
     <>
@@ -65,15 +67,9 @@ export default function Products({ items }: { items: Items }) {
                 </div>
               </Link>
               <div className="flex gap-4 mx-auto sm:mx-0 sm:ml-auto w-fit">
-                <button className="hidden sm:block btn bg-primary-blue text-white hover:bg-[#006A9B]">
-                  지금 구매하기
-                </button>
-                <button className="hidden sm:block btn bg-primary-orange text-white hover:bg-[#CD6511]">
-                  지금 렌트하기
-                </button>
-                <button className="btn border border-primary-blue hover:bg-[#006A9B] hover:text-white">
-                  장바구니에 추가하기
-                </button>
+                <PurchaseBtn className="hidden sm:flex" />
+                <RentBtn className="hidden sm:flex" />
+                <AddCartBtn />
               </div>
             </li>
           ),

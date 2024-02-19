@@ -15,7 +15,7 @@ module.exports = buttonPlugin.withOptions(
   (
     options = {
       style: {
-        width: "fit-content",
+        "min-width": "fit-content",
         height: "40px",
         padding: "10px",
         "border-radius": "30px",

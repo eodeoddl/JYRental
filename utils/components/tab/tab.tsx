@@ -8,10 +8,6 @@ export default function Tab({ path, item }: { path: string; item: Item }) {
   const pathname = usePathname();
   const href = item.slug ? path + "/" + item.slug : path;
   const isActive = href === pathname;
-  console.log(pathname, path);
-  // console.log(pathname === path);
-  // console.log(isActive, href, pathname, path);
-  // console.log("pathname", pathname, "href", href, "path", path);
 
   return (
     <Link

@@ -53,7 +53,10 @@ export default function Carousel({
 
   return (
     <>
-      <div ref={slider} className={["relative", className].join(" ")}>
+      <div
+        ref={slider}
+        className={["relative w-10/12 mx-auto", className].join(" ")}
+      >
         <div className="overflow-hidden">
           <div
             ref={container}
@@ -72,7 +75,6 @@ export default function Carousel({
                     src="/itemImage.png"
                     alt="item"
                     fill
-                    // sizes={"(min-width: 640px): 33vw, 100vw"}
                     style={{ objectFit: "contain" }}
                   />
                 </div>
@@ -91,7 +93,7 @@ export default function Carousel({
           </div>
         </div>
         <button
-          className="group absolute right-0 top-1/2 -translate-y-2/4 sm:translate-x-full translate-x-2/4 p-2.5"
+          className="group absolute w-1/12 max-w-[30px] right-0 top-1/2 -translate-y-2/4 sm:translate-x-full translate-x-2/4"
           disabled={cssIndex === style.length - 1 || undefined}
           onClick={() =>
             dispatch({ type: "increase", containerRange: style.length })
@@ -100,12 +102,12 @@ export default function Carousel({
           <Icon
             path={icons.nextBtn.path}
             viewBox={icons.nextBtn.viewBox}
-            className="fill-black w-11 group-disabled:fill-btn-gray"
+            className="fill-black  group-disabled:fill-btn-gray"
           />
         </button>
         <button
           className={[
-            "group absolute left-0 top-1/2 -translate-y-2/4 -translate-x-2/4 sm:-translate-x-full p-2.5 ",
+            "group absolute w-1/12 max-w-[30px] left-0 top-1/2 -translate-y-2/4 -translate-x-2/4 sm:-translate-x-full",
           ].join(" ")}
           disabled={cssIndex === 0 || undefined}
           onClick={() => dispatch({ type: "decrease" })}
@@ -113,7 +115,7 @@ export default function Carousel({
           <Icon
             path={icons.prevBtn.path}
             viewBox={icons.prevBtn.viewBox}
-            className="fill-black w-11 group-disabled:fill-btn-gray"
+            className="fill-black group-disabled:fill-btn-gray"
           />
         </button>
       </div>

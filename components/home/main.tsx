@@ -25,8 +25,7 @@ const carouselMockup = [
 ];
 
 export default function Main() {
-  // const styles = useRef({});
-
+  // carousel items fetching here (2 different types)
   return (
     <main className="grid grid-cols-1 gap-5 sm:gap-10 w-[80%] mx-auto">
       <Section1 />

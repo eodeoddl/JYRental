@@ -1,39 +1,21 @@
 "use client";
 import { Icon } from "@/utils/components/icon";
-import filterOptions from "./filterOptions.json";
-import icons from "./icons.json";
-import { useState } from "react";
-
-// type Filter = {
-//   [keyof filterOptions] : {active: boolean}
-// }
+import filterOptions from "./assets/filterOptions.json";
+import icons from "./assets/iconsfilter.json";
+import useSelectAllNodes from "@/utils/hooks/useSelectAllNodes";
+import useAccordian from "@/utils/hooks/useAccordian";
 
 export default function Filter() {
-  const [filter, setFilter] = useState(() => {
-    const value = {};
-    Object.keys(filterOptions).forEach(key =>
-      Object.assign(value, { [key]: { active: false } }),
-    );
-    return value;
-  });
-
-  // useLayoutEffect(() => {}, []);
-  console.log(filter);
+  const { nodes, resisterNode } = useSelectAllNodes();
+  const { active, handleAccordian } = useAccordian(nodes);
 
   return (
     <ul className="">
-      {Object.keys(filterOptions).map(key => (
+      {Object.keys(filterOptions).map((key, i) => (
         <li className="mb-5" key={key}>
           <span
             className="flex justify-between items-center text-xl font-semibold border-b-2 w-full"
-            onClick={() => {
-              setFilter(prev =>
-                Object.assign(
-                  { ...prev },
-                  { [key]: { active: !prev[key].active } },
-                ),
-              );
-            }}
+            onClick={() => handleAccordian(i)}
           >
             {key}
             <Icon
@@ -41,34 +23,19 @@ export default function Filter() {
               viewBox={icons.filter.viewBox}
               className={[
                 "w-4 h-4 origin-center transition-transform duration-500",
-                `${filter[key].active ? "rotate-90" : "rotate-0"}`,
+                `${active[i] ? "rotate-90" : "rotate-0"}`,
               ].join(" ")}
             />
           </span>
-          <div
-            className={[
-              "grid overflow-hidden transition-[gridTemplateRows] duration-500",
-              `${
-                filter[key].active
-                  ? "grid-rows-[repeat(1,auto)]"
-                  : "grid-rows-[repeat(1,0)]"
-              }`,
-            ].join(" ")}
-          >
-            <div>
-              {(
-                filterOptions[key] as {
-                  [key: keyof typeof filterOptions]: string[];
-                }
-              ).map((option, i) => {
-                return (
-                  <label className="block my-2.5" key={i}>
-                    <input type="checkbox" value={option} className="" />
-                    {option}
-                  </label>
-                );
-              })}
-            </div>
+          <div ref={el => el && resisterNode(i, el)}>
+            {filterOptions[key].map((option, i) => {
+              return (
+                <label className="block my-2.5" key={i}>
+                  <input type="checkbox" value={option} className="" />
+                  {option}
+                </label>
+              );
+            })}
           </div>
         </li>
       ))}

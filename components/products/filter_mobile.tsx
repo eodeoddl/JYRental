@@ -1,15 +1,5 @@
 import { Icon } from "@/utils/components/icon";
-import filterOption from "./filterOptions.json";
-
-const icons = require("./icons.json");
-// type IconType = typeof icons;
-// type IconType = "filter_m1" | "filter_m2";
-// type IconsSet<T extends object> = { [K in "filter_m1" | "filter_m2"]:  typeof T[K] };
-
-// type I22<T> = { [K keyof T] : }
-// type Subset<T> = {
-//   [K in keyof T]?: T[K];
-// };
+import icons from "./assets/iconsfilter.json";
 
 export default function M_Filter() {
   return (
@@ -22,7 +12,6 @@ export default function M_Filter() {
         />
         <select>
           <option value="">필터</option>
-          {}
         </select>
       </div>
       <div className="flex">

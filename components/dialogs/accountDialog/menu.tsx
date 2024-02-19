@@ -37,7 +37,6 @@ export default function MenuDialog() {
       <CloseButton width="w-3" height="h-3" />
       <menu className="text-default-dark-gray font-medium space-y-4 nth-[n]:cursor-pointer clear-both">
         <li onClick={() => router.push("/userBoard")}>계정</li>
-        <li>내 주문 추적</li>
         <li>로그아웃</li>
       </menu>
     </div>

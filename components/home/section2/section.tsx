@@ -19,7 +19,7 @@ export default function Section2({ carouselMockup }) {
           including versions of Lorem Ipsum.
         </p>
       </div>
-      <Carousel className="w-full mb-8" data={carouselMockup} />
+      <Carousel className="mb-8" data={carouselMockup} />
       <button className="btn-animate before:btn-before before:hover:btn-before-animate before:hover:bg-[#808080] bg-btn-light-orange text-white mx-auto">
         지금 렌트하기
       </button>

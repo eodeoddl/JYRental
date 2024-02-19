@@ -11,19 +11,19 @@ export default function Layout({
   params: { productId: number };
 }) {
   return (
-    <div>
+    <>
       {children}
       <TabGroup
         items={[
           { text: "제품세부정보", slug: "" },
-          { text: "제품 기능", slug: "tab1" },
-          { text: "제품 리뷰", slug: "tab2" },
-          { text: "질문과 답변", slug: "tab3" },
+          { text: "제품 기능", slug: "feature" },
+          { text: "질문과 답변", slug: "qna" },
+          { text: "비슷한 제품", slug: "similar" },
         ]}
         path={`/printer/${params.productId}`}
       />
       {tabItems}
       <Footer />
-    </div>
+    </>
   );
 }
