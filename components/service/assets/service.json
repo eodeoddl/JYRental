@@ -1,0 +1,17 @@
+[
+  {
+    "title": "네트워크 프린팅 솔루션",
+    "discription": "Duis et massa ut elit fermentum condimentum. Sed euismod malesuada elit, nec rhoncus nisl efficitur vel. Vestibulum volutpat ante non tristique volutpat. Quisque volutpat mauris eget libero suscipit, eu luctus arcu fermentum. Nulla facilisi. Etiam auctor tellus non lacus aliquet, ut ultrices massa tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst.",
+    "imageSrc": "/service/service1.png"
+  },
+  {
+    "title": "사무기기 유지관리",
+    "discription": "Duis et massa ut elit fermentum condimentum. Sed euismod malesuada elit, nec rhoncus nisl efficitur vel. Vestibulum volutpat ante non tristique volutpat. Quisque volutpat mauris eget libero suscipit, eu luctus arcu fermentum. Nulla facilisi. Etiam auctor tellus non lacus aliquet, ut ultrices massa tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst.",
+    "imageSrc": "/service/service2.png"
+  },
+  {
+    "title": "보증 및 수리",
+    "discription": "Duis et massa ut elit fermentum condimentum. Sed euismod malesuada elit, nec rhoncus nisl efficitur vel. Vestibulum volutpat ante non tristique volutpat. Quisque volutpat mauris eget libero suscipit, eu luctus arcu fermentum. Nulla facilisi. Etiam auctor tellus non lacus aliquet, ut ultrices massa tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst.",
+    "imageSrc": "/service/service3.png"
+  }
+]

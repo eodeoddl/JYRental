@@ -19,6 +19,8 @@ export default function Header({ viewport }: { viewport: Viewport }) {
   const dispatcher = usePositionContext();
   const pathname = usePathname();
 
+  console.log("header render ", isScrolled);
+
   useEffect(() => {
     if (!modalPositionRef.current || !header.current) return;
 
@@ -38,7 +40,10 @@ export default function Header({ viewport }: { viewport: Viewport }) {
   useEffect(() => {
     if (!scrollWatcher.current) return;
     const scrollObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => setIsScrolled(!entry.isIntersecting));
+      entries.forEach(entry => {
+        console.log("set scroll");
+        setIsScrolled(!entry.isIntersecting);
+      });
     });
     scrollObserver.observe(scrollWatcher.current);
     return () => {

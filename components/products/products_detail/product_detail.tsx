@@ -9,7 +9,13 @@ import Counter from "./counter";
 import PriceTag from "../../priceTag/priceTag";
 import PreviewItemsWithThumbnail from "./previewItemsWithThumbnail";
 
-export default function Product_detail({ data }: { data: ProductItem }) {
+export default function Product_detail({
+  data,
+  productId,
+}: {
+  data: ProductItem;
+  productId: number;
+}) {
   return (
     <div className="p-5">
       <BackButton className="flex mb-5" />
@@ -44,12 +50,14 @@ export default function Product_detail({ data }: { data: ProductItem }) {
             </div>
             <div className="grid grid-rows-2 gap-5">
               <div className="flex justify-around items-center">
-                <RentBtn />
-                <PurchaseBtn />
+                <RentBtn productId={productId} />
+                <PurchaseBtn productId={productId} purchaseType="buy">
+                  지금 구매하기
+                </PurchaseBtn>
               </div>
               <div className="flex flex-wrap justify-around items-center gap-5">
-                <Counter />
-                <AddCartBtn />
+                <Counter productId={productId} />
+                <AddCartBtn productId={productId} />
               </div>
             </div>
           </div>

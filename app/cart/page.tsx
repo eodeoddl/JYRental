@@ -1,3 +1,4 @@
+import Cart from "@/components/cart/cart";
 import BackButton from "@/utils/components/backButton";
 
 export default function Page() {
@@ -12,6 +13,7 @@ export default function Page() {
           icon={false}
         />
       </span>
+      <Cart />
     </div>
   );
 }

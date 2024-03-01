@@ -1,31 +1,33 @@
 "use client";
-import qnas from "./assets/qnas.json";
+
+import { TypedQnas } from "./type/types";
 import { Icon } from "@/utils/components/icon";
 import icons from "./assets/iconsqna.json";
-import useSelectAllNodes from "@/utils/hooks/useSelectAllNodes";
-import useAccordian from "@/utils/hooks/useAccordian";
+import AccordionWrapper from "@/utils/components/accordion/accordionProvider";
+import AccordionSummary from "@/utils/components/accordion/accordionSummary";
+import AccrodionDetail from "@/utils/components/accordion/accordionDetail";
 
 export default function Qna() {
-  const { nodes, resisterNode } = useSelectAllNodes();
-  const { handleAccordian } = useAccordian(nodes);
-
   return (
     <ul>
-      {Object.keys(qnas).map((question, i) => (
-        <li
-          key={i}
-          className="w-9/12 mx-auto"
-          onClick={() => handleAccordian(i)}
-        >
-          <div className="flex justify-between items-center border-b-2 p-1 my-3 cursor-pointer">
-            <span className="text-xl font-bold">{question}</span>
-            <Icon
-              path={icons.plusIcon.path}
-              viewBox={icons.plusIcon.viewBox}
-              className="w-4 h-4"
+      {Object.keys(TypedQnas).map((question, i) => (
+        <li key={i} className="w-9/12 mx-auto">
+          <AccordionWrapper>
+            <AccordionSummary
+              className="w-full border-b-2 p-1 my-3 text-xl font-bold"
+              text={question}
+              icon={() => (
+                <Icon
+                  path={icons.plusIcon.path}
+                  viewBox={icons.plusIcon.viewBox}
+                  className="w-4 h-4"
+                />
+              )}
             />
-          </div>
-          <div ref={el => el && resisterNode(i, el)}>{qnas[question]}</div>
+            <AccrodionDetail>
+              <div>{TypedQnas[question]}</div>
+            </AccrodionDetail>
+          </AccordionWrapper>
         </li>
       ))}
     </ul>

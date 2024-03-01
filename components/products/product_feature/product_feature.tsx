@@ -17,7 +17,7 @@ export default function Product_feature() {
         `${isExpanded ? style.show : style.hide}`,
       ].join(" ")}
     >
-      {/* texting componente */}
+      {/* testing component */}
       <div className="w-full h-[1500px] bg-white">
         <Image
           src="/itemImage.png"

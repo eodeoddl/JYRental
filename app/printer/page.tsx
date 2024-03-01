@@ -7,7 +7,7 @@ import PageNation from "@/utils/components/pagination/pagenation";
 
 // need fetching data from server
 const items = Array.from({ length: 84 }, (_, i) => ({
-  productId: 33,
+  productId: 1 + i,
   productName: "title" + i,
   src: "/itemImage.png",
   discription: `Lorem Ipsum is simply dummy text of the printing and typesetting

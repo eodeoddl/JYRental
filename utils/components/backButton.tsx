@@ -16,7 +16,7 @@ export default function BackButton({
   return (
     <button
       onClick={() => router.back()}
-      className={["justify-around items-center", className].join(" ")}
+      className={["flex justify-around items-center", className].join(" ")}
     >
       {icon && (
         <Icon

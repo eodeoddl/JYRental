@@ -26,5 +26,5 @@ export default function Page({ params }: { params: { productId: number } }) {
     speed: 200,
   };
 
-  return <Product_detail data={data} />;
+  return <Product_detail data={data} productId={params.productId} />;
 }

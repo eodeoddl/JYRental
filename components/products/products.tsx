@@ -67,9 +67,15 @@ export default function Products({ items }: { items: Items }) {
                 </div>
               </Link>
               <div className="flex gap-4 mx-auto sm:mx-0 sm:ml-auto w-fit">
-                <PurchaseBtn className="hidden sm:flex" />
-                <RentBtn className="hidden sm:flex" />
-                <AddCartBtn />
+                <PurchaseBtn
+                  productId={productId}
+                  purchaseType="buy"
+                  className="hidden sm:flex"
+                >
+                  지금 구매하기
+                </PurchaseBtn>
+                <RentBtn productId={productId} className="hidden sm:flex" />
+                <AddCartBtn productId={productId} />
               </div>
             </li>
           ),
