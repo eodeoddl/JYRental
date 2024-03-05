@@ -46,13 +46,19 @@ function SelectBox({
     <div>
       <input type="hidden" name={name} value={inputValue} />
       <AccordionSummary
-        className={[className, `${isActive ? activeClassName : ""}`].join(" ")}
+        className={[
+          className,
+          `${isActive ? activeClassName : ""}`,
+          `${inputValue ? "text-black" : "text-[#9ca3af]"}`,
+        ].join(" ")}
         text={inputValue || initialText}
-        value={inputValue}
         icon={dropdownIcon}
       />
       <AccrodionDetail>
-        <ul ref={listRef} className="shadow-lg rounded-xl w-6/12">
+        <ul
+          ref={listRef}
+          className={[className, "text-left shadow-lg rounded-xl"].join(" ")}
+        >
           {options.map(({ text, value }) => (
             <li
               key={text}

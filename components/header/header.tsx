@@ -12,14 +12,11 @@ import usePositionContext from "@/utils/hooks/usePosition";
 import { usePathname } from "next/navigation";
 
 export default function Header({ viewport }: { viewport: Viewport }) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const scrollWatcher = useRef<HTMLDivElement>(null);
   const modalPositionRef = useRef<any>(null);
   const header = useRef<any>(null);
   const dispatcher = usePositionContext();
   const pathname = usePathname();
-
-  console.log("header render ", isScrolled);
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     if (!modalPositionRef.current || !header.current) return;
@@ -38,29 +35,28 @@ export default function Header({ viewport }: { viewport: Viewport }) {
   }, []);
 
   useEffect(() => {
-    if (!scrollWatcher.current) return;
-    const scrollObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        console.log("set scroll");
-        setIsScrolled(!entry.isIntersecting);
-      });
-    });
-    scrollObserver.observe(scrollWatcher.current);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const headerHeight = header.current.offsetHeight;
+      setIsSticky(scrollTop > headerHeight / 2);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      scrollObserver.disconnect();
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <>
-      <div ref={scrollWatcher} />
       <header
         ref={header}
         className={[
           "w-full h-[var(--header-height)] grid grid-cols-header sm:grid-cols-header-lg gap-x-2 items-center transition-all duration-500 px-5 lg:px-28",
           `${
-            isScrolled
-              ? "fixed top-0 left-0 bg-white/75 z-50"
+            isSticky
+              ? "sticky top-0 bg-white/75 z-50"
               : "relative bg-transparent"
           }`,
         ].join(" ")}

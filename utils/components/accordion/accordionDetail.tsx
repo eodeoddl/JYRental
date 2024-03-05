@@ -21,7 +21,8 @@ export default function AccrodionDetail({
     <div
       ref={ref}
       className={[
-        "overflow-hidden max-h-0 transition-[max-height] duration-150 ease-in-out",
+        "max-h-0 transition-[max-height] duration-150 ease-in-out",
+        `${isActive ? "" : "overflow-hidden"}`,
       ].join(" ")}
     >
       {children}
