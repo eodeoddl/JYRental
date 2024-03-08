@@ -7,7 +7,7 @@ export default function TabGroup({
 }: {
   items: Item[];
   path: string;
-  className: string;
+  className?: string;
 }) {
   return (
     <div

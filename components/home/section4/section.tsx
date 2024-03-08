@@ -1,6 +1,6 @@
 import Carousel from "@/utils/components/carousel/carousel";
 
-export default function Section4({ carouselMockup }) {
+export default function Section4({ carouselMockup }: any) {
   return (
     <section className="text-center">
       <div className="mb-8">

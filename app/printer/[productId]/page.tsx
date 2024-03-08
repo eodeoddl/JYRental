@@ -11,7 +11,11 @@ export type ProductItem = {
   description: string;
 };
 
-export default function Page({ params }: { params: { productId: number } }) {
+export default async function Page({
+  params,
+}: {
+  params: { productId: number };
+}) {
   // data fetching with params.product Id
   const data: ProductItem = {
     title: "A3 컬러 디지털 복합기 MX5 시리즈 23 ppm SL-X5230NR",

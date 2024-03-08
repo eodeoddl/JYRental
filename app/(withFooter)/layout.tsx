@@ -3,18 +3,18 @@ import React from "react";
 
 export default function HeaderWithFooter({
   children,
-  accountModal,
-  cartModal,
+  // accountModal,
+  // cartModal,
 }: {
   children: React.ReactNode;
-  accountModal: React.ReactNode;
-  cartModal: React.ReactNode;
+  // accountModal: React.ReactNode;
+  // cartModal: React.ReactNode;
 }) {
   return (
     <>
       {children}
-      {accountModal}
-      {cartModal}
+      {/* {accountModal} */}
+      {/* {cartModal} */}
       <Footer />
     </>
   );

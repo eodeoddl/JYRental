@@ -1,5 +1,5 @@
 import { Icon } from "@/utils/components/icon";
-import icons from "./icons.json";
+import { TypedIcons } from "./types/types";
 import socialIcons from "./socialIcons.json";
 import contents from "./contents.json";
 import Link from "next/link";
@@ -40,8 +40,8 @@ export default function Footer() {
               <li key={i}>
                 <Link href={link}>
                   <Icon
-                    path={icons[icon].path}
-                    viewBox={icons[icon].viewBox}
+                    path={TypedIcons[icon].path}
+                    viewBox={TypedIcons[icon].viewBox}
                     className="inline-block w-5 h-5 mr-3 fill-btn-light-blue"
                   />
                   <span className="inline-block">{text}</span>

@@ -23,7 +23,15 @@ const items = Array.from({ length: 84 }, (_, i) => ({
   rentPrice: 1000,
 }));
 
-export default async function PrinterPage({
+type Items = {
+  productId: number;
+  productName: string;
+  src: string;
+  description: string;
+  price: number;
+}[];
+
+export default async function Page({
   searchParams,
 }: {
   searchParams: { pageIndex: number };
