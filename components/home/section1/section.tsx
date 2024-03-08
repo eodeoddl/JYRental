@@ -24,7 +24,7 @@ export default function Section1() {
       </div>
       <div className="relative">
         <Image
-          src="/img1.png"
+          src="/Img1.png"
           alt="product_image"
           style={{ width: "100%", height: "auto" }}
           width={300}
