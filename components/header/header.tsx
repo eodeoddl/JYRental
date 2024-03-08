@@ -64,10 +64,12 @@ export default function Header({ viewport }: { viewport: Viewport }) {
         <h1 className="cursor-pointer">
           <Link href="/" className="relative block w-full h-[50px]">
             <Image
-              src="/logo.png"
+              src="/Logo.png"
               alt="Logo"
-              fill
-              style={{ objectFit: "contain" }}
+              width={100}
+              height={50}
+              // fill
+              // style={{ objectFit: "contain" }}
             />
           </Link>
         </h1>
