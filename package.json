@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/cli": "^12.10.1",
     "@reduxjs/toolkit": "^2.0.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/container-queries": "^0.1.1",

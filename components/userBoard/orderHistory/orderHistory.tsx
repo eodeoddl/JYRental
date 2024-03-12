@@ -2,32 +2,30 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import ItemDetail from "./itemDetail";
 
-export type OrderHistoryItems =
-  | {
-      productName: string;
-      productId: number;
+export type HistroyItem = {
+  productName: string;
+  productId: number;
+  description: string;
+  imageSrc: string;
+};
 
-      description: string;
-      imageSrc: string;
-    }[]
-  | [];
-
-export default function OrderHistory({ items }: { items: OrderHistoryItems }) {
-  const [currentItem, setCurrnetItem] = useState<null | object>(null);
+export default function OrderHistory({ items }: { items: HistroyItem[] }) {
+  const [currentItem, setCurrnetItem] = useState<null | HistroyItem>(null);
   const router = useRouter();
   const buttonAction = (
     e: React.MouseEvent<HTMLButtonElement>,
-    item: object,
+    item: HistroyItem,
   ) => {
     e.stopPropagation();
     setCurrnetItem(item);
   };
 
   return (
-    <div className="w-8/12 mx-auto space-y-10 mb-20">
+    <div className="w-10/12 mx-auto space-y-10 mb-20">
       {currentItem ? (
-        <div>TLqkf</div>
+        <ItemDetail item={currentItem} />
       ) : (
         <>
           <h3 className="h3-sm sm:h3-lg">주문내역</h3>
