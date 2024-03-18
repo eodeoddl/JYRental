@@ -4,12 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ItemDetail from "./itemDetail";
 
-export type HistroyItem = {
-  productName: string;
-  productId: number;
-  description: string;
-  imageSrc: string;
-};
+import type { HistroyItem } from "@/app/userBoard/@tabItems/orderHistory/page";
 
 export default function OrderHistory({ items }: { items: HistroyItem[] }) {
   const [currentItem, setCurrnetItem] = useState<null | HistroyItem>(null);
