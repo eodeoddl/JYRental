@@ -32,7 +32,7 @@ if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ] || [ -z "$AWS_
 fi
 
 # Define the credentials file path
-CREDENTIALS_FILE="$HOME/.aws/credentials"
+CREDENTIALS_FILE="~/vsCode-workspace/jyrental/.aws/credentials"
 
 # Check if credentials file exists
 if [ ! -f "$CREDENTIALS_FILE" ]; then
