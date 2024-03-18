@@ -1,6 +1,6 @@
 "use client";
+import type { HistroyItem } from "@/app/userBoard/@tabItems/orderHistory/page";
 import Image from "next/image";
-import type { HistroyItem } from "./orderHistory";
 
 export default function ItemDetail({ item }: { item: HistroyItem }) {
   const btnStyle = {
